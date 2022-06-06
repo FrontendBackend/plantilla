@@ -49,6 +49,12 @@ const MENUITEMS = [
     type: 'link',
     name: 'Slide Toggle',
     icon: 'all_inclusive'
+  },
+  {
+    state: 'slide-toggle',
+    type: 'link',
+    name: 'Auditoria',
+    icon: 'security'
   }
 ];
 
