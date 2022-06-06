@@ -51,7 +51,7 @@ const MENUITEMS = [
     icon: 'all_inclusive'
   },
   {
-    state: 'slide-toggle',
+    state: 'auditoria',
     type: 'link',
     name: 'Auditoria',
     icon: 'security'
