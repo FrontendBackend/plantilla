@@ -15,6 +15,11 @@ public class TokenController {
     @Autowired
     private ConsumerTokenServices tokenServices;
 
+    /**
+     * Revocar el token con la ID dada
+     * 
+     * @param token El token a revocar.
+     */
     @GetMapping("/anular/{tokenId:.*}")
     public void revocarToken(@PathVariable("tokenId") String token) {
         tokenServices.revokeToken(token);

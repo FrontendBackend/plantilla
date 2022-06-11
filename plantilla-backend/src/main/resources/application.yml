@@ -24,6 +24,24 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
 
+  mail:
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    username: jvaleriom@vallegrande.edu.pe
+    password: pqbhgbjuuslmtsdh
+    port: 587
+    properties:
+      mail:
+        ssl:
+          enable: true
+        smtp:
+          auth: true
+          starttls:
+            enable: true       
+            required: true     
+    protocol: smtp
+    test-connection: false
+
 logging:
   level:
     root: INFO
@@ -31,3 +49,6 @@ logging:
     org.springframework.web: INFO
     # org.springframework.security: INFO
     org.hibernate.SQL: debug
+
+
+  

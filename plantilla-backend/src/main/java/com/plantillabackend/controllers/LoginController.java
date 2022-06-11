@@ -19,10 +19,12 @@ import com.plantillabackend.models.entity.TblResetToken;
 import com.plantillabackend.models.entity.TblUsuario;
 import com.plantillabackend.services.LoginService;
 import com.plantillabackend.services.ResetTokenService;
+import com.plantillabackend.utils.EmailUtil;
+import com.plantillabackend.utils.Mail;
 
 @RestController
 @RequestMapping("/login")
-public class LoginController {
+public class LoginController extends BaseController{
     
     @Autowired
     private LoginService service;
@@ -30,38 +32,44 @@ public class LoginController {
     @Autowired
     private ResetTokenService tokenService;
 
-    // @Autowired
-    // private EmailUtil emailUtil;
+    @Autowired
+    private EmailUtil emailUtil;
 
-    // @PostMapping(value = "/enviarCorreo", consumes = MediaType.TEXT_PLAIN_VALUE)
-    // public ResponseEntity<Integer> enviarCorreo(@RequestBody String correo) throws Exception {
-    //     int rpta = 0;
+    /**
+     * Estoy tratando de enviar un correo electrónico con un enlace para restablecer la contraseña
+     * 
+     * @param correo Email
+     * @return La respuesta es un objeto JSON con la siguiente estructura:
+     */
+    @PostMapping(value = "/enviarCorreo", consumes = MediaType.TEXT_PLAIN_VALUE)
+    public ResponseEntity<Integer> enviarCorreo(@RequestBody String correo) throws Exception {
+        int rpta = 0;
 
-    //     TblUsuario us = service.verificarNombreUsuario(correo);
-    //     if (us != null && us.getIdUsuario() > 0) {
-    //         TblResetToken token = new TblResetToken();
-    //         token.setToken(UUID.randomUUID().toString());
-    //         token.setUser(us);
-    //         token.setExpiracion(10);
-    //         tokenService.guardar(token);
+        TblUsuario us = service.verificarNombreUsuario(correo);
+        if (us != null && us.getIdUsuario() > 0) {
+            TblResetToken token = new TblResetToken();
+            token.setToken(UUID.randomUUID().toString());
+            token.setUser(us);
+            token.setExpiracion(10);
+            tokenService.guardar(token);
 
-    //         Mail mail = new Mail();
-    //         mail.setFrom("email.prueba.demo@gmail.com");
-    //         mail.setTo(us.getUsername());
-    //         mail.setSubject("RESTABLECER CONTRASEÑA - LEGAJO");
+            Mail mail = new Mail();
+            mail.setFrom("email.prueba.demo@gmail.com");
+            mail.setTo(us.getUsername());
+            mail.setSubject("RESTABLECER CONTRASEÑA - LEGAJO");
 
-    //         Map<String, Object> model = new HashMap<>();
-    //         String url = "http://localhost:4200/recuperar/" + token.getToken();
-    //         model.put("user", token.getUser().getUsername());
-    //         model.put("resetUrl", url);
-    //         mail.setModel(model);
+            Map<String, Object> model = new HashMap<>();
+            String url = "http://localhost:4200/recuperar/" + token.getToken();
+            model.put("user", token.getUser().getUsername());
+            model.put("resetUrl", url);
+            mail.setModel(model);
 
-    //         emailUtil.enviarMail(mail);
+            emailUtil.enviarMail(mail);
 
-    //         rpta = 1;
-    //     }
-    //     return new ResponseEntity<Integer>(rpta, HttpStatus.OK);
-    // }
+            rpta = 1;
+        }
+        return new ResponseEntity<Integer>(rpta, HttpStatus.OK);
+    }
 
     /**
      * Comprueba si el token es válido y si no está caducado
