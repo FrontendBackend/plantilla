@@ -20,7 +20,6 @@ import com.plantillabackend.utils.ConstantesUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -103,6 +102,13 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
     }
 
    
+    /**
+     * Crea un nuevo usuario en la base de datos.
+     * 
+     * @param tblUsuarioDTO es el objeto que estoy enviando al servicio
+     * @param auditoriaDTO Es un DTO que contiene el nombre de usuario, terminal y fecha.
+     * @return Un objeto TblUsuarioDTO
+     */
     @Override
     @Transactional(readOnly = false)
     public TblUsuarioDTO crearUsuario(TblUsuarioDTO tblUsuarioDTO, AuditoriaDTO auditoriaDTO) throws Exception {
@@ -140,6 +146,15 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
         return tblUsuario;
     }
 
+    /**
+     * Toma un objeto TblUsuarioDTO, un objeto TblUsuario y un objeto AuditoriaDTO, y devuelve un
+     * objeto TblUsuarioDTO
+     * 
+     * @param tblUsuarioDTO es el objeto que viene de la interfaz
+     * @param tblUsuario es el objeto que estoy tratando de actualizar
+     * @param auditoriaDTO Es un DTO que contiene el nombre de usuario, la fecha y el terminal.
+     * @return Un objeto TblUsuarioDTO
+     */
     @Transactional(readOnly = false)
     @Override
     public TblUsuarioDTO modificarUsuario(TblUsuarioDTO tblUsuarioDTO, TblUsuario tblUsuario, AuditoriaDTO auditoriaDTO) throws Exception {
