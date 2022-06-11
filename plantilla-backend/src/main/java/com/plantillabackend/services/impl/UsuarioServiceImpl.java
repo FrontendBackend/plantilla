@@ -7,31 +7,40 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.plantillabackend.dtos.AuditoriaDTO;
+import com.plantillabackend.dtos.TblUsuarioDTO;
 import com.plantillabackend.models.entity.TblUsuario;
 import com.plantillabackend.models.repository.UsuarioRepository;
 import com.plantillabackend.services.UsuarioService;
+import com.plantillabackend.utils.ConstantesUtil;
 
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 @Service
-public class UsuarioServiceImpl implements UsuarioService, UserDetailsService{
-// public class UsuarioServiceImpl implements UsuarioService{
-
-    private Logger logger = LoggerFactory.getLogger(UsuarioService.class);
+@Slf4j
+@Transactional(readOnly = true)
+public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
+    // public class UsuarioServiceImpl implements UsuarioService{
 
     @Autowired
     private UsuarioRepository repo;
+
+    @Autowired
+    private BCryptPasswordEncoder bcrypt;
     
     /**
-     * Toma un nombre de usuario, encuentra al usuario en la base de datos y devuelve un objeto
-     * UserDetails con el nombre de usuario, la contraseña y las funciones del usuario.
+     * Toma un nombre de usuario, encuentra al usuario en la base de datos y
+     * devuelve un objeto
+     * UserDetails con el nombre de usuario, la contraseña y las funciones del
+     * usuario.
      * 
      * @param username El nombre de usuario del usuario.
      * @return Un objeto de usuario
@@ -43,7 +52,7 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService{
         TblUsuario usuario = repo.findOneByUsername(username);
 
         if (usuario == null) {
-            logger.error("Error en el login: no existe el usuario '" + username + "' en el sistema!");
+            log.error("Error en el login: no existe el usuario '" + username + "' en el sistema!");
             throw new UsernameNotFoundException(
                     "Error en el login: no existe el usuario '" + username + "' en el sistema!");
         }
@@ -51,7 +60,7 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService{
         List<GrantedAuthority> authorities = usuario.getRoles()
                 .stream()
                 .map(role -> new SimpleGrantedAuthority(role.getNombre()))
-                .peek(authority -> logger.info("Role: " + authority.getAuthority()))
+                .peek(authority -> log.info("Role: " + authority.getAuthority()))
                 .collect(Collectors.toList());
 
         return new User(usuario.getUsername(), usuario.getPassword(), usuario.isEnabled(), true, true, true,
@@ -68,5 +77,95 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService{
     @Transactional(readOnly = true)
     public TblUsuario findByUsername(String username) {
         return repo.findOneByUsername(username);
+    }
+
+    /**
+     * La función listarUsuarios() es una función que devuelve una lista de objetos
+     * TblUsuarioDTO
+     * 
+     * @return Una lista de objetos TblUsuarioDTO.
+     */
+    @Override
+    public List<TblUsuarioDTO> listarUsuarios() {
+        return this.repo.listarUsuarios();
+    }
+
+    /**
+     * La función obtenerUsuarioPorId es una función que devuelve un objeto
+     * TblUsuarioDTO
+     * 
+     * @param idUsuario Largo
+     * @return Un objeto TblUsuarioDTO.
+     */
+    @Override
+    public TblUsuarioDTO obtenerUsuarioPorId(Long idUsuario) {
+        return this.repo.obtenerUsuarioPorId(idUsuario);
+    }
+
+   
+    @Override
+    @Transactional(readOnly = false)
+    public TblUsuarioDTO crearUsuario(TblUsuarioDTO tblUsuarioDTO, AuditoriaDTO auditoriaDTO) throws Exception {
+        TblUsuario tblUsuario = new TblUsuario();
+
+        this.configurarValores(tblUsuarioDTO, tblUsuario);
+
+        tblUsuario.setEsRegistro(ConstantesUtil.IND_ACTIVO);
+        tblUsuario.setFeCreacion(auditoriaDTO.getFecha());
+        tblUsuario.setUsCreacion(auditoriaDTO.getUsername());
+        tblUsuario.setIpCreacion(auditoriaDTO.getTerminal());
+
+        TblUsuario tblUsuarioCreado = this.repo.save(tblUsuario);
+
+        TblUsuarioDTO tblUsuarioDTOCreado = this.obtenerUsuarioPorId(tblUsuarioCreado.getIdUsuario());
+
+        return tblUsuarioDTOCreado;
+    }
+
+    /**
+     * Toma un objeto DTO, crea un nuevo objeto de entidad y luego copia los valores del DTO a la
+     * entidad.
+     * 
+     * @param tblUsuarioDTO es el objeto que viene de la interfaz
+     * @param tblUsuario es la entidad que voy a persistir
+     * @return Un objeto TblUsuario
+     */
+    @Transactional(readOnly = false)
+    private TblUsuario configurarValores(TblUsuarioDTO tblUsuarioDTO, TblUsuario tblUsuario) {
+
+        tblUsuario.setUsername(tblUsuarioDTO.getUsername());
+        tblUsuario.setPassword(bcrypt.encode(tblUsuarioDTO.getPassword()));
+        tblUsuario.setEnabled(ConstantesUtil.ENABLED);
+
+        return tblUsuario;
+    }
+
+    @Transactional(readOnly = false)
+    @Override
+    public TblUsuarioDTO modificarUsuario(TblUsuarioDTO tblUsuarioDTO, TblUsuario tblUsuario, AuditoriaDTO auditoriaDTO) throws Exception {
+
+        this.configurarValores(tblUsuarioDTO, tblUsuario);
+
+        tblUsuario.setFeActualizacion(auditoriaDTO.getFecha());
+        tblUsuario.setUsActualizacion(auditoriaDTO.getUsername());
+        tblUsuario.setIpActualizacion(auditoriaDTO.getTerminal());
+
+        TblUsuario tblUsuarioModificado = this.repo.save(tblUsuario);
+
+        TblUsuarioDTO tblUsuarioDTOModificado = this.obtenerUsuarioPorId(tblUsuarioModificado.getIdUsuario());
+
+        return tblUsuarioDTOModificado;
+    }
+
+    /**
+     * Si el idUsuario se encuentra en la base de datos, devuelve el objeto, de lo contrario, devuelve
+     * nulo
+     * 
+     * @param idUsuario Largo
+     * @return El método devuelve un objeto TblUsuario.
+     */
+    @Override
+    public TblUsuario findById(Long idUsuario) {
+        return repo.findById(idUsuario).orElse(null);
     }
 }

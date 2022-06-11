@@ -23,18 +23,18 @@ class PlantillaBackendApplicationTests {
 	void contextLoads() {
 	}
 
-	// @Test
-	// void verficarClave() {
-	// 	long demo = 1;
+	@Test
+	void verficarClave() {
+		long demo = 1;
 
-	// 	TblUsuario us = new TblUsuario();
-	// 	us.setIdUsuario(demo);
-	// 	us.setUsername("juanvalerio785@gmail.com");
-	// 	us.setPassword(bcrypt.encode("123"));
-	// 	us.setEnabled(true);
+		TblUsuario us = new TblUsuario();
+		us.setIdUsuario(demo);
+		us.setUsername("juanvalerio785@gmail.com");
+		us.setPassword(bcrypt.encode("123"));
+		us.setEnabled(true);
 
-	// 	TblUsuario retorno = repo.save(us);
-	// 	assertTrue(retorno.getPassword().equals(us.getPassword()));
-	// }
+		TblUsuario retorno = repo.save(us);
+		assertTrue(retorno.getPassword().equals(us.getPassword()));
+	}
 
 }
