@@ -17,6 +17,9 @@ import { DemoMaterialModule } from './demo-material-module';
 
 import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
+import { LoginIniciarComponent } from './login/login-iniciar/login-iniciar.component';
+import { LoginRegistrarComponent } from './login/login-registrar/login-registrar.component';
+import { LoginRecuperarComponent } from './login/login-recuperar/login-recuperar.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { SpinnerComponent } from './shared/spinner.component';
     FullComponent,
     AppHeaderComponent,
     SpinnerComponent,
-    AppSidebarComponent
+    AppSidebarComponent,
+    LoginIniciarComponent,
+    LoginRegistrarComponent,
+    LoginRecuperarComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +40,7 @@ import { SpinnerComponent } from './shared/spinner.component';
     FlexLayoutModule,
     HttpClientModule,
     SharedModule,
-    RouterModule.forRoot(AppRoutes)
+    RouterModule.forRoot(AppRoutes),
   ],
   providers: [
     {

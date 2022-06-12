@@ -1,0 +1,28 @@
+<mat-card>
+  <mat-card-content>
+
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <span>Recuperar cuenta</span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <form #loginForm="ngForm">
+
+      <img matCardImage
+        src="https://wwwp.ugc.edu.co/sede/bogota/pages/restablecer/app/imagenes/restablecer.png"
+        alt="imagen recuperar">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Correo</mat-label>
+        <input matInput name="gmail" required>
+        <mat-error>
+          Please provide a valid email address
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" [disabled]="!loginForm.form.valid" routerLink="/login">Recuperar contraseña</button>
+
+    </form>
+  </mat-card-content>
+</mat-card>

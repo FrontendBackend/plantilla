@@ -32,6 +32,9 @@ import { SnackbarComponent } from './snackbar/snackbar.component';
 import { SliderComponent } from './slider/slider.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { AuditoriaComponent } from './auditoria/auditoria.component';
+import { DemoComponent } from './demo/demo.component';
+import { DemosComponent } from './demos/demos.component';
+import { DemossComponent } from './demoss/demoss.component';
 
 @NgModule({
   imports: [
@@ -64,7 +67,10 @@ import { AuditoriaComponent } from './auditoria/auditoria.component';
     SnackbarComponent,
     SliderComponent,
     SlideToggleComponent,
-    AuditoriaComponent
+    AuditoriaComponent,
+    DemoComponent,
+    DemosComponent,
+    DemossComponent
   ]
 })
 export class MaterialComponentsModule {}

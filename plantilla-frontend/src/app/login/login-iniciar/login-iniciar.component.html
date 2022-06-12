@@ -1,0 +1,42 @@
+<mat-card>
+  <mat-card-content>
+
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <span>Log in</span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <form #loginForm="ngForm">
+
+      <img matCardImage src="https://cdni.iconscout.com/illustration/premium/thumb/account-login-error-4560627-3784193.png" alt="imagen login">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Usuario</mat-label>
+        <input matInput name="username" required>
+        <mat-error>
+          Please provide a valid email address
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" name="password" required>
+        <mat-error>
+          Please provide a valid password
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" [disabled]="!loginForm.form.valid" routerLink="/dashboard">Iniciar sesión</button>
+
+      <br>
+
+      <button mat-button color="primary" routerLink="/registrar">Registrarse</button>
+
+      <br>
+
+      <button mat-button color="primary" routerLink="/recuperar">¿Recuperar contraseña?</button>
+
+    </form>
+  </mat-card-content>
+</mat-card>

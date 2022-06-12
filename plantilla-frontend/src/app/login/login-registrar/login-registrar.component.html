@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-card-content>
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <span>Sign up</span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <form #loginForm="ngForm">
+
+      <img matCardImage src="https://pathwayport.com/saasland/images/signup.svg" alt="imagen registrarse">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Usuario</mat-label>
+        <input matInput name="username" required>
+        <mat-error>
+          Please provide a valid email address
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" name="password" required>
+        <mat-error>
+          Please provide a valid password
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Confirmar contraseña</mat-label>
+        <input matInput type="password" name="password" required>
+        <mat-error>
+          Please provide a valid password
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" [disabled]="!loginForm.form.valid" routerLink="/login">Registrar</button>
+
+    </form>
+  </mat-card-content>
+</mat-card>

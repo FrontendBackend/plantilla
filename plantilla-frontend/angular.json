@@ -14,19 +14,20 @@
             "allowedCommonJsDependencies": [
               "rxjs-compat",
               "rxjs",
-              "hammerjs"           
+              "hammerjs"
             ],
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
             "polyfills": "src/polyfills.ts",
             "assets": [
               "src/assets",
               "src/favicon.ico"
             ],
             "styles": [
-              "src/styles.css",
+              "src/styles.scss",
               "src/assets/styles/style.scss"
             ],
             "scripts": [],
@@ -87,10 +88,10 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "scripts": [
-              
+
             ],
             "styles": [
-              "src/styles.css",
+              "src/styles.scss",
               "src/assets/styles/style.scss"
             ],
             "assets": [
@@ -143,7 +144,7 @@
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
-      "style": "css"
+      "style": "scss"
     },
     "@schematics/angular:directive": {
       "prefix": "app"

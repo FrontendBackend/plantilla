@@ -46,20 +46,20 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .requestMatchers()
                 .and()
                 .authorizeRequests()
-                // .antMatchers("/v2/api-docs/**").permitAll()
-                // .antMatchers("/v3/api-docs/**").permitAll()
-                // .antMatchers("/empleados/**").authenticated()
-                // .antMatchers("/centrosestudios/**").authenticated()
-                // .antMatchers("/conyugesempleados/**").authenticated()
-                // .antMatchers("/dialectos/**").authenticated()
-                // .antMatchers("/estudiossuperiores/**").authenticated()
-                // .antMatchers("/profesiones/**").authenticated()
-                // .antMatchers("/renaes/**").authenticated()
-                // .antMatchers("/ubigeos/**").authenticated()
+                .antMatchers("/tokens/anular/**").permitAll()
+                .antMatchers("/v2/api-docs/**").permitAll()
+                .antMatchers("/v3/api-docs/**").permitAll()
+                .antMatchers("/usuarios/**").authenticated()
+                .antMatchers("/centrosestudios/**").authenticated()
+                .antMatchers("/conyugesempleados/**").authenticated()
+                .antMatchers("/dialectos/**").authenticated()
+                .antMatchers("/estudiossuperiores/**").authenticated()
+                .antMatchers("/profesiones/**").authenticated()
+                .antMatchers("/renaes/**").authenticated()
+                .antMatchers("/ubigeos/**").authenticated()
 
-                // .antMatchers("/menus/**").authenticated()
-                .antMatchers("/tokens/anular/**").permitAll();
-                // .antMatchers("/tokens/**").authenticated();
+                .antMatchers("/menus/**").authenticated()
+                .antMatchers("/tokens/**").authenticated();
 
     }
 }

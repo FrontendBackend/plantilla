@@ -11,13 +11,14 @@ body {
   overflow-x: hidden;
   color: $bodytext;
   font-weight: 300;
-  background: $inverse;
+  // background: $inverse;
 }
 
 html {
   position: relative;
   min-height: 100%;
   background: $white;
+  // background-image : url("https://mdn.mozillademos.org/files/6457/mdn_logo_only_color.png");
 }
 
 .main-container {
