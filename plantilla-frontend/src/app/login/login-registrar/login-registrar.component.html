@@ -6,36 +6,49 @@
       </mat-toolbar-row>
     </mat-toolbar>
 
-    <form #loginForm="ngForm">
+    <form #loginForm="ngForm" [formGroup]="form" (ngSubmit)="enviar()">
 
       <img matCardImage src="https://pathwayport.com/saasland/images/signup.svg" alt="imagen registrarse">
 
       <mat-form-field appearance="outline">
         <mat-label>Usuario</mat-label>
-        <input matInput name="username" required>
+        <input matInput formControlName="username" required>
         <mat-error>
-          Please provide a valid email address
+          Por favor ingrese su nombre de usuario válida!!
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Contraseña</mat-label>
-        <input matInput type="password" name="password" required>
+        <mat-label>Correo de recuperación</mat-label>
+        <input matInput formControlName="correo" required>
         <mat-error>
-          Please provide a valid password
+          Por favor ingrese su correo electronico válida!!
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Confirmar contraseña</mat-label>
-        <input matInput type="password" name="password" required>
+        <mat-label>Clave</mat-label>
+        <input matInput name="password" type="password" formControlName="password" [formGroup]="form" required>
         <mat-error>
-          Please provide a valid password
+          Por favor ingrese su clave válida!!
         </mat-error>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" [disabled]="!loginForm.form.valid" routerLink="/login">Registrar</button>
+      <mat-form-field appearance="outline">
+        <mat-label>Confirmar clave</mat-label>
+        <input matInput name="confirmarPassword" type="password" formControlName="confirmarPassword" [formGroup]="form" required>
+        <mat-error>
+          Por favor confirme nuevamente su clave válida!!
+        </mat-error>
+      </mat-form-field>
 
+      <button mat-raised-button color="primary" [class.spinner]="enProceso" [disabled]="enProceso">
+        <span *ngIf="!enProceso">
+          Registrar
+        </span>
+      </button>
+
+      <mat-toolbar *ngIf="form.controls.confirmarPassword.errors?.MatchPassword">Contraseñas no coinciden</mat-toolbar>
     </form>
   </mat-card-content>
 </mat-card>

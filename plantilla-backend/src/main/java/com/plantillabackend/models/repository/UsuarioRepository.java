@@ -26,7 +26,7 @@ public interface UsuarioRepository extends GenericRepository<TblUsuario, Long> {
      * @return Una lista de objetos TblUsuarioDTO.
      */
     @Query("SELECT new com.plantillabackend.dtos.TblUsuarioDTOResultado("
-            + "usu.idUsuario, usu.username, usu.password, usu.enabled "
+            + "usu.idUsuario, usu.username, usu.correo, usu.password, usu.enabled "
             + " ) "
             + "FROM TblUsuario usu "
             // + "WHERE usu.esRegistro = '1' "
@@ -58,7 +58,7 @@ public interface UsuarioRepository extends GenericRepository<TblUsuario, Long> {
     * @return Un objeto DTO
     */
     @Query("SELECT new com.plantillabackend.dtos.TblUsuarioDTOResultado("
-            + "usu.idUsuario, usu.username, usu.password, usu.enabled "
+            + "usu.idUsuario, usu.username, usu.correo, usu.password, usu.enabled "
             + " ) "
             + "FROM TblUsuario usu "
             + "WHERE usu.idUsuario = :idUsuario "

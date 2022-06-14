@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { FullComponent } from './layouts/full/full.component';
+import { LoginFormularioComponent } from './login/login-formulario/login-formulario.component';
 import { LoginIniciarComponent } from './login/login-iniciar/login-iniciar.component';
 import { LoginRecuperarComponent } from './login/login-recuperar/login-recuperar.component';
 import { LoginRegistrarComponent } from './login/login-registrar/login-registrar.component';
@@ -16,13 +17,14 @@ export const AppRoutes: Routes = [
     component: LoginIniciarComponent
   },
   {
-    path: 'registrar',
-    component: LoginRegistrarComponent
+    path: '1',
+    component: LoginFormularioComponent
   },
   {
     path: 'recuperar',
     component: LoginRecuperarComponent
   },
+
   {
     path: '',
     component: FullComponent,

@@ -20,6 +20,9 @@ import { SpinnerComponent } from './shared/spinner.component';
 import { LoginIniciarComponent } from './login/login-iniciar/login-iniciar.component';
 import { LoginRegistrarComponent } from './login/login-registrar/login-registrar.component';
 import { LoginRecuperarComponent } from './login/login-recuperar/login-recuperar.component';
+import { CdkTableModule } from '@angular/cdk/table';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoginFormularioComponent } from './login/login-formulario/login-formulario.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,8 @@ import { LoginRecuperarComponent } from './login/login-recuperar/login-recuperar
     AppSidebarComponent,
     LoginIniciarComponent,
     LoginRegistrarComponent,
-    LoginRecuperarComponent
+    LoginRecuperarComponent,
+    LoginFormularioComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +45,8 @@ import { LoginRecuperarComponent } from './login/login-recuperar/login-recuperar
     HttpClientModule,
     SharedModule,
     RouterModule.forRoot(AppRoutes),
+    ReactiveFormsModule,
+    CdkTableModule
   ],
   providers: [
     {

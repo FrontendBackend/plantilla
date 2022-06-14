@@ -20,6 +20,7 @@ import com.plantillabackend.utils.ConstantesUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -120,6 +121,34 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
         tblUsuario.setFeCreacion(auditoriaDTO.getFecha());
         tblUsuario.setUsCreacion(auditoriaDTO.getUsername());
         tblUsuario.setIpCreacion(auditoriaDTO.getTerminal());
+        // tblUsuario.setFeCreacion(new Date());
+        // tblUsuario.setUsCreacion("VALERIOUS");
+        // tblUsuario.setIpCreacion("127.0.0.0");
+
+        TblUsuario tblUsuarioCreado = this.repo.save(tblUsuario);
+
+        TblUsuarioDTO tblUsuarioDTOCreado = this.obtenerUsuarioPorId(tblUsuarioCreado.getIdUsuario());
+
+        return tblUsuarioDTOCreado;
+    }
+
+    /**
+     * Crea un nuevo usuario en la base de datos.
+     * 
+     * @param tblUsuarioDTO Este es el objeto que estoy enviando al servicio.
+     * @return Un objeto TblUsuarioDTO
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public TblUsuarioDTO crearUsuarioExterno(TblUsuarioDTO tblUsuarioDTO) throws Exception {
+        TblUsuario tblUsuario = new TblUsuario();
+
+        this.configurarValores(tblUsuarioDTO, tblUsuario);
+
+        tblUsuario.setEsRegistro(ConstantesUtil.IND_ACTIVO);
+        tblUsuario.setFeCreacion(new Date());
+        tblUsuario.setUsCreacion("MANUAL");
+        tblUsuario.setIpCreacion("127.0.0.0");
 
         TblUsuario tblUsuarioCreado = this.repo.save(tblUsuario);
 
@@ -140,6 +169,7 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
     private TblUsuario configurarValores(TblUsuarioDTO tblUsuarioDTO, TblUsuario tblUsuario) {
 
         tblUsuario.setUsername(tblUsuarioDTO.getUsername());
+        tblUsuario.setCorreo(tblUsuarioDTO.getCorreo());
         tblUsuario.setPassword(bcrypt.encode(tblUsuarioDTO.getPassword()));
         tblUsuario.setEnabled(ConstantesUtil.ENABLED);
 

@@ -13,29 +13,33 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Usuario</mat-label>
-        <input matInput name="username" required>
+        <input matInput name="username" [(ngModel)]="usuario" [disabled]="enProceso" required>
         <mat-error>
-          Please provide a valid email address
+          Por favor ingrese su nombre de usuario válida!!
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Contraseña</mat-label>
-        <input matInput type="password" name="password" required>
+        <input matInput type="password" name="password" [(ngModel)]="clave" [disabled]="enProceso" required>
         <mat-error>
-          Please provide a valid password
+          Por favor ingrese su clave válida!!
         </mat-error>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" [disabled]="!loginForm.form.valid" routerLink="/dashboard">Iniciar sesión</button>
+      <button mat-raised-button color="primary" [class.spinner]="enProceso" [disabled]="enProceso" (click)="iniciarSesion()">
+        <span *ngIf="!enProceso">
+          Iniciar sesión
+        </span>
+      </button>
 
       <br>
 
-      <button mat-button color="primary" routerLink="/registrar">Registrarse</button>
+      <button mat-button color="primary" routerLink="/1" [disabled]="enProceso">Registrarse</button>
 
       <br>
 
-      <button mat-button color="primary" routerLink="/recuperar">¿Recuperar contraseña?</button>
+      <button mat-button color="primary" routerLink="/recuperar" [disabled]="enProceso">¿Recuperar contraseña?</button>
 
     </form>
   </mat-card-content>

@@ -1,0 +1,14 @@
+<!-- <mat-toolbar class="mat-elevation-z1">
+  <div fxLayoutAlign="start stretch" fxLayoutGap="8px">
+    <button mat-button (click)="retornar()" matTooltip="Retornar a la ventana anterior">
+      <mat-icon>arrow_back</mat-icon> {{textoRetorno}}
+    </button>
+
+  </div>
+  <div fxFlex></div>
+
+</mat-toolbar> -->
+
+
+<app-login-registrar *ngIf="tblUsuarioDTO" [tblUsuarioDTO]="tblUsuarioDTO" [tipoAccionCrud]="tipoAccionCrud">
+</app-login-registrar>

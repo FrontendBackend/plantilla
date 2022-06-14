@@ -37,6 +37,10 @@ public class TblUsuario implements Serializable {
     // Crear una columna en la base de datos llamada NOMBRE que no sea nula y única.
     @Column(name = "NOMBRE", nullable = false, unique = true)
     private String username;
+    
+    // Crear una columna en la base de datos llamada CORREO que no permita valores nulos y sea única.
+    @Column(name = "CORREO", nullable = false, unique = true)
+    private String correo;
 
     // Una columna en la base de datos que no admite valores NULL.
     @Column(name = "CLAVE", nullable = false)

@@ -4,5 +4,11 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  HOST: 'http://localhost:1999/api',
+
+  TOKEN_AUTH_USERNAME: 'templateapp',
+  TOKEN_AUTH_PASSWORD: 'templatecodex',
+  TOKEN_NAME: 'access_token',
 };

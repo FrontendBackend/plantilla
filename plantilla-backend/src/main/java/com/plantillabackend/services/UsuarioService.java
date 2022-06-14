@@ -39,6 +39,15 @@ public interface UsuarioService {
      */
     TblUsuarioDTO crearUsuario(TblUsuarioDTO tblUsuarioDTO, AuditoriaDTO auditoriaDTO) throws Exception;
 
+
+    /**
+     * Crea un usuario.
+     * 
+     * @param tblUsuarioDTO El objeto que se creará.
+     * @return TblUsuarioDTO
+     */
+    TblUsuarioDTO crearUsuarioExterno(TblUsuarioDTO tblUsuarioDTO) throws Exception;
+
     /**
      * Modifica el usuario.
      * 

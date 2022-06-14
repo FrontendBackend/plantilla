@@ -9,14 +9,22 @@
   "compilerOptions": {
     "baseUrl": "./",
     "downlevelIteration": true,
+    "forceConsistentCasingInFileNames": true,
     "module": "es2020",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
     "experimentalDecorators": true,
+    "importHelpers": true,
+    "strictPropertyInitialization": false,
+    "strictNullChecks": false,
     "target": "es2015",
     "strict": true,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": true,
+    "removeComments": true,
+    "resolveJsonModule": true,
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -24,5 +32,12 @@
       "es2017",
       "dom"
     ]
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true,
+    "fullTemplateTypeCheck": true,
   }
 }

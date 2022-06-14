@@ -90,6 +90,49 @@ public class UsuarioController extends BaseController {
     }
 
     /**
+     * Recibe un objeto JSON, lo valida y luego lo guarda en la base de datos.
+     * 
+     * @param tblUsuarioDTO Este es el objeto que estoy tratando de salvar.
+     * @param resultadoValidacion Resultado de enlace
+     * @return Un objeto ResponseEntity.
+     */
+    @PostMapping("/crearUsuarioExterno")
+    public ResponseEntity<?> crearUsuarioExterno(@Valid @RequestBody TblUsuarioDTO tblUsuarioDTO,
+            BindingResult resultadoValidacion) throws Exception {
+
+        TblUsuarioDTO tblUsuarioDTOCreado = null;
+        Map<String, Object> respuesta = new HashMap<>();
+
+        if (resultadoValidacion.hasErrors()) {
+            List<String> errores = null;
+
+            errores = resultadoValidacion.getFieldErrors().stream()
+                    .map(err -> String.format("La propiedad '%s' %s", err.getField(), err.getDefaultMessage()))
+                    .collect(Collectors.toList());
+
+            respuesta.put("mensaje", "Se han encontrado inconsistencias para crear un usuario");
+            respuesta.put("error", errores.toString());
+
+            return new ResponseEntity<Map<String, Object>>(respuesta, HttpStatus.BAD_REQUEST);
+        }
+
+        try {
+            tblUsuarioDTOCreado = this.usuarioService.crearUsuarioExterno(tblUsuarioDTO);
+        } catch (DataAccessException e) {
+            respuesta.put("mensaje", "Ocurrió un error al intentar crear un usuario");
+            respuesta.put("error", e.getMostSpecificCause().getMessage());
+            log.error(e.getMostSpecificCause().getMessage());
+
+            return new ResponseEntity<Map<String, Object>>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        respuesta.put("mensaje", "El usuario ha sido creada");
+        respuesta.put("tblUsuarioDTOCreado", tblUsuarioDTOCreado);
+
+        return new ResponseEntity<Map<String, Object>>(respuesta, HttpStatus.CREATED);
+    }
+
+    /**
      * Obtiene un usuario por id y lo devuelve.
      * 
      * @param idUsuario 1
