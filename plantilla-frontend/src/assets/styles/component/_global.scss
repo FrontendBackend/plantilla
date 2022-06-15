@@ -21,6 +21,15 @@ html {
   // background-image : url("https://mdn.mozillademos.org/files/6457/mdn_logo_only_color.png");
 }
 
+.mat-simple-snackbar-action {
+  color: #cdb70f;
+}
+
+.mat-simple-snackbar {
+  font-family: Poppins, sans-serif;
+  font-size: 12px;
+}
+
 .main-container {
   display: flex;
   flex-direction: column;

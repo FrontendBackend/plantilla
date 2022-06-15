@@ -43,11 +43,7 @@ export class LoginFormularioComponent implements OnInit {
     });
   }
 
-  /**
-   * Me permite retornar a la lista de contratos
-   */
-  retornar() {
+  eventoUsuarioCreado() {
     this.router.navigate(['/login']);
   }
-
 }

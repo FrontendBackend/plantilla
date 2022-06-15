@@ -10,5 +10,5 @@
 </mat-toolbar> -->
 
 
-<app-login-registrar *ngIf="tblUsuarioDTO" [tblUsuarioDTO]="tblUsuarioDTO" [tipoAccionCrud]="tipoAccionCrud">
+<app-login-registrar *ngIf="tblUsuarioDTO" [tblUsuarioDTO]="tblUsuarioDTO" [tipoAccionCrud]="tipoAccionCrud" (eventoUsuarioCreado)="eventoUsuarioCreado()">
 </app-login-registrar>

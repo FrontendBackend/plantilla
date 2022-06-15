@@ -1,6 +1,6 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TblUsuario } from './../../models/tbl-usuario';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
@@ -35,6 +35,8 @@ export class LoginRegistrarComponent implements OnInit {
   controlesNovalidos: any[];
 
   @Input() tipoAccionCrud = ETipoAccionCRUD.NINGUNA;
+
+  @Output() eventoUsuarioCreado = new EventEmitter<TblUsuario>();
 
   constructor(
     private fb: FormBuilder,
@@ -133,7 +135,8 @@ export class LoginRegistrarComponent implements OnInit {
       Object.values(this.form.controls).forEach(control => control.markAllAsTouched());
 
       this.snack.open('Existen datos incorrectos o faltantes, por favor verifique', 'CERRAR', {
-        duration: 4000
+        duration: 4000,
+        // panelClass: ['mat-toolbar', 'mat-primary']
       });
 
       return;
@@ -184,8 +187,9 @@ export class LoginRegistrarComponent implements OnInit {
         });
 
         this.tblUsuarioDTO = respuesta;
-        this.enProceso = false;
-
+        if (this.tipoAccionCrud === ETipoAccionCRUD.CREAR) {
+          this.eventoUsuarioCreado.emit(this.tblUsuarioDTO);
+        }
       });
     }
   }

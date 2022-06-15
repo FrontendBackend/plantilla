@@ -40,6 +40,9 @@
         <mat-error>
           Por favor confirme nuevamente su clave válida!!
         </mat-error>
+        <mat-error *ngIf="form.controls.confirmarPassword.errors?.MatchPassword">
+          Las claves no coinciden!!
+        </mat-error>
       </mat-form-field>
 
       <button mat-raised-button color="primary" [class.spinner]="enProceso" [disabled]="enProceso">
@@ -48,7 +51,6 @@
         </span>
       </button>
 
-      <mat-toolbar *ngIf="form.controls.confirmarPassword.errors?.MatchPassword">Contraseñas no coinciden</mat-toolbar>
     </form>
   </mat-card-content>
 </mat-card>
