@@ -5,6 +5,7 @@ import { LoginFormularioComponent } from './login/login-formulario/login-formula
 import { LoginIniciarComponent } from './login/login-iniciar/login-iniciar.component';
 import { LoginRecuperarComponent } from './login/login-recuperar/login-recuperar.component';
 import { LoginRegistrarComponent } from './login/login-registrar/login-registrar.component';
+import { LoginTokenComponent } from './login/login-recuperar/login-token/login-token.component';
 
 export const AppRoutes: Routes = [
   {
@@ -22,7 +23,10 @@ export const AppRoutes: Routes = [
   },
   {
     path: 'recuperar',
-    component: LoginRecuperarComponent
+    component: LoginRecuperarComponent,
+    children: [
+      { path: ':token', component: LoginTokenComponent }
+    ]
   },
 
   {

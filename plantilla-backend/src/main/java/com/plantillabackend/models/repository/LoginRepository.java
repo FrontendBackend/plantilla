@@ -16,7 +16,7 @@ public interface LoginRepository extends GenericRepository<TblUsuario, Integer> 
      * @param usuario El nombre del parámetro que se pasará al método.
      * @return Una lista de objetos TblUsuario.
      */
-    @Query("FROM TblUsuario us where us.username =:usuario")
+    @Query("FROM TblUsuario us where us.correo =:usuario")
     TblUsuario verificarNombreUsuario(@Param("usuario") String usuario);
 
     /**
@@ -28,6 +28,6 @@ public interface LoginRepository extends GenericRepository<TblUsuario, Integer> 
      */
     @Transactional
     @Modifying
-    @Query("UPDATE TblUsuario us SET us.password =:clave WHERE us.username =:nombre")
+    @Query("UPDATE TblUsuario us SET us.password =:clave WHERE us.correo =:nombre")
     void cambiarClave(@Param("clave") String clave, @Param("nombre") String nombre);
 }

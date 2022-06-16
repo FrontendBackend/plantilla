@@ -55,11 +55,11 @@ public class LoginController extends BaseController{
 
             Mail mail = new Mail();
             mail.setFrom("email.prueba.demo@gmail.com");
-            mail.setTo(us.getUsername());
-            mail.setSubject("RESTABLECER CONTRASEÑA - LEGAJO");
+            mail.setTo(us.getCorreo());
+            mail.setSubject("RESTABLECER CONTRASEÑA - SISTEMA");
 
             Map<String, Object> model = new HashMap<>();
-            String url = "http://localhost:4200/recuperar/" + token.getToken();
+            String url = "http://localhost:4200/#/recuperar/" + token.getToken();
             model.put("user", token.getUser().getUsername());
             model.put("resetUrl", url);
             mail.setModel(model);
@@ -106,7 +106,7 @@ public class LoginController extends BaseController{
     public ResponseEntity<Object> restablecerClave(@PathVariable("token") String token, @RequestBody String clave) {
         try {
             TblResetToken rt = tokenService.findByToken(token);
-            service.cambiarClave(clave, rt.getUser().getUsername());
+            service.cambiarClave(clave, rt.getUser().getCorreo());
             tokenService.eliminar(rt);
         } catch (Exception e) {
             return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -1,0 +1,54 @@
+<mat-card *ngIf="!tokenValido">
+  <span>
+    <b>La petición no es válida o ha expirado 😢😢</b>
+  </span>
+
+  <br>
+  <br>
+
+  <img matCardImage src="https://cdn-icons-png.flaticon.com/512/179/179386.png" alt="imagen expirada">
+</mat-card>
+
+<mat-card *ngIf="tokenValido">
+  <mat-card-content>
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <span>Sign up</span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <img matCardImage src="https://pathwayport.com/saasland/images/signup.svg" alt="imagen registrarse">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Clave</mat-label>
+        <input matInput name="password" type="password" formControlName="password" [formGroup]="form"
+          [disabled]="enProceso" required>
+        <mat-error>
+          Por favor ingrese su clave válida!!
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Confirmar clave</mat-label>
+        <input matInput name="confirmarPassword" type="password" formControlName="confirmarPassword" [formGroup]="form"
+          [disabled]="enProceso" required>
+        <mat-error>
+          Por favor confirme nuevamente su clave válida!!
+        </mat-error>
+        <mat-error *ngIf="form.controls.confirmarPassword.errors?.MatchPassword">
+          Las claves no coinciden!!
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [class.spinner]="enProceso"
+        [disabled]="form.invalid || enProceso">
+        <span *ngIf="!enProceso">
+          Cambiar clave
+        </span>
+      </button>
+
+    </form>
+  </mat-card-content>
+</mat-card>

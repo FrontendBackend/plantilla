@@ -1,28 +1,41 @@
 <mat-card>
-  <mat-card-content>
+  <div class="example-container" *ngIf="route.children.length === 0">
+    <mat-card-content>
 
-    <mat-toolbar color="primary">
-      <mat-toolbar-row>
-        <span>Recuperar cuenta</span>
-      </mat-toolbar-row>
-    </mat-toolbar>
 
-    <form #loginForm="ngForm">
+      <mat-toolbar color="primary">
+        <mat-toolbar-row>
+          <span>Recuperar cuenta</span>
+        </mat-toolbar-row>
+      </mat-toolbar>
 
-      <img matCardImage
-        src="https://wwwp.ugc.edu.co/sede/bogota/pages/restablecer/app/imagenes/restablecer.png"
+      <!-- <form #loginForm="ngForm"> -->
+
+      <img matCardImage src="https://wwwp.ugc.edu.co/sede/bogota/pages/restablecer/app/imagenes/restablecer.png"
         alt="imagen recuperar">
 
       <mat-form-field appearance="outline">
         <mat-label>Correo</mat-label>
-        <input matInput name="gmail" required>
+        <input matInput type="email" placeholder="Tu email" required [(ngModel)]="email">
         <mat-error>
           Please provide a valid email address
         </mat-error>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" [disabled]="!loginForm.form.valid" routerLink="/login">Recuperar contraseña</button>
+      <!-- <button mat-raised-button color="primary" [disabled]="!loginForm.form.valid" routerLink="/login">Recuperar contraseña</button> -->
+      <button mat-raised-button color="primary" (click)="enviar()" [disabled]="!email">Enviar correo</button>
 
-    </form>
-  </mat-card-content>
+      <br>
+      <br>
+
+      <mat-progress-bar mode="determinate" [value]="porcentaje"></mat-progress-bar>
+
+      <br>
+      <a routerLink="/login">Ir a inicio</a>
+      <!-- <mat-toolbar *ngIf="mensaje">{{mensaje}}</mat-toolbar> -->
+      <!-- <mat-toolbar *ngIf="error">{{error}}</mat-toolbar> -->
+      <!-- </form> -->
+    </mat-card-content>
+  </div>
+  <router-outlet *ngIf="route.children.length !== 0"></router-outlet>
 </mat-card>

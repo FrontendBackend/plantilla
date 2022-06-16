@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { AppRoutes } from './app.routing';
 import { AppComponent } from './app.component';
 
@@ -23,6 +23,7 @@ import { LoginRecuperarComponent } from './login/login-recuperar/login-recuperar
 import { CdkTableModule } from '@angular/cdk/table';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginFormularioComponent } from './login/login-formulario/login-formulario.component';
+import { LoginTokenComponent } from './login/login-recuperar/login-token/login-token.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { LoginFormularioComponent } from './login/login-formulario/login-formula
     LoginIniciarComponent,
     LoginRegistrarComponent,
     LoginRecuperarComponent,
-    LoginFormularioComponent
+    LoginFormularioComponent,
+    LoginTokenComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,8 @@ import { LoginFormularioComponent } from './login/login-formulario/login-formula
   providers: [
     {
       provide: LocationStrategy,
-      useClass: PathLocationStrategy
+      // useClass: PathLocationStrategy,
+      useClass: HashLocationStrategy,
     }
   ],
   bootstrap: [AppComponent]
