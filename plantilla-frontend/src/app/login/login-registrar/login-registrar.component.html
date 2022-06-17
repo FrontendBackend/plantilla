@@ -2,7 +2,7 @@
   <mat-card-content>
     <mat-toolbar color="primary">
       <mat-toolbar-row>
-        <span>Sign up</span>
+        <span>Registrarse</span>
       </mat-toolbar-row>
     </mat-toolbar>
 
@@ -28,7 +28,7 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Clave</mat-label>
-        <input matInput name="password" type="password" formControlName="password" [formGroup]="form" required>
+        <input matInput name="password" type="password" formControlName="password" [formGroup]="form" [disabled]="enProceso" required>
         <mat-error>
           Por favor ingrese su clave válida!!
         </mat-error>
@@ -36,7 +36,7 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Confirmar clave</mat-label>
-        <input matInput name="confirmarPassword" type="password" formControlName="confirmarPassword" [formGroup]="form" required>
+        <input matInput name="confirmarPassword" type="password" formControlName="confirmarPassword" [formGroup]="form" [disabled]="enProceso" required>
         <mat-error>
           Por favor confirme nuevamente su clave válida!!
         </mat-error>

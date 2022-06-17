@@ -14,7 +14,7 @@ export class LoginRecuperarComponent implements OnInit {
   mensaje: string;
   error: string;
   porcentaje: number = 0;
-
+  enProceso = false;
   constructor(
     private loginService: LoginService,
     public route: ActivatedRoute,
@@ -27,6 +27,7 @@ export class LoginRecuperarComponent implements OnInit {
 
   enviar() {
     this.porcentaje = 20;
+    this.enProceso = true;
     this.loginService.enviarCorreo(this.email).subscribe(data => {
       if (data === 1) {
         // this.error = null
@@ -35,6 +36,7 @@ export class LoginRecuperarComponent implements OnInit {
         this.snack.open(mensaje, 'Ok', {
           duration: 4000
         });
+        this.enProceso = false;
         this.router.navigate(['/login']);
       } else {
         let error = "El usuario ingresado no existe";
@@ -42,6 +44,7 @@ export class LoginRecuperarComponent implements OnInit {
           duration: 4000
         });
         this.porcentaje = 0;
+        this.enProceso = false;
       }
     });
   }

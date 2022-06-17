@@ -1,19 +1,10 @@
-<mat-card *ngIf="!tokenValido">
-  <span>
-    <b>La petición no es válida o ha expirado 😢😢</b>
-  </span>
-
-  <br>
-  <br>
-
-  <img matCardImage src="https://cdn-icons-png.flaticon.com/512/179/179386.png" alt="imagen expirada">
-</mat-card>
+<!-- INICIALIZAR EL RESTABLECIMIENTO DE LA CLAVE -->
 
 <mat-card *ngIf="tokenValido">
   <mat-card-content>
     <mat-toolbar color="primary">
       <mat-toolbar-row>
-        <span>Sign up</span>
+        <span>Nueva clave</span>
       </mat-toolbar-row>
     </mat-toolbar>
 
@@ -51,4 +42,16 @@
 
     </form>
   </mat-card-content>
+</mat-card>
+
+<!-- SE EXPIRÓ PARA RESTABLECER LA CLAVE -->
+<mat-card *ngIf="!tokenValido">
+  <span>
+    <b>La petición no es válida o ha expirado 😢😢</b>
+  </span>
+
+  <br>
+  <br>
+
+  <img matCardImage src="https://cdn-icons-png.flaticon.com/512/179/179386.png" alt="imagen expirada">
 </mat-card>

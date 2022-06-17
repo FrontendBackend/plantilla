@@ -44,7 +44,8 @@ export class LoginRegistrarComponent implements OnInit {
     private snack: MatSnackBar,
     private route: ActivatedRoute,
     private usuarioService: UsuarioService
-  ) { }
+  ) {
+  }
 
 
   ngOnInit() {
@@ -89,7 +90,7 @@ export class LoginRegistrarComponent implements OnInit {
   }
 
   iniciarFormulario(): void {
-
+    this.enProceso = true;
     if (this.tipoAccionCrud === ETipoAccionCRUD.CONSULTAR) {
       this.esFormularioSoloLectura = true;
     }
@@ -108,6 +109,7 @@ export class LoginRegistrarComponent implements OnInit {
     if (this.esFormularioSoloLectura) {
       Object.values(this.form.controls).forEach(control => control.disable());
     }
+    this.enProceso = false;
   }
 
   tieneError(campo: string, error: string): boolean {

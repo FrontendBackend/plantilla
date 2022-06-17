@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CdkTableModule } from '@angular/cdk/table';
+import { Not404Component } from './error/not404/not404.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { CdkTableModule } from '@angular/cdk/table';
     UsuarioListaComponent,
     UsuarioTarjetaComponent,
     UsuarioDialogoComponent,
-    AuditoriaContenedorDetalleComponent
+    AuditoriaContenedorDetalleComponent,
+    Not404Component
   ],
   imports: [
     CommonModule,

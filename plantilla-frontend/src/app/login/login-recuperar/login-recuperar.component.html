@@ -2,10 +2,11 @@
   <div class="example-container" *ngIf="route.children.length === 0">
     <mat-card-content>
 
-
       <mat-toolbar color="primary">
         <mat-toolbar-row>
-          <span>Recuperar cuenta</span>
+          <span>
+            Recuperar clave
+          </span>
         </mat-toolbar-row>
       </mat-toolbar>
 
@@ -14,27 +15,35 @@
       <img matCardImage src="https://wwwp.ugc.edu.co/sede/bogota/pages/restablecer/app/imagenes/restablecer.png"
         alt="imagen recuperar">
 
+      <span>
+        <b>
+          Recibirás un correo para restablecer tu clave
+        </b>
+      </span>
+      <br>
+      <br>
       <mat-form-field appearance="outline">
         <mat-label>Correo</mat-label>
-        <input matInput type="email" placeholder="Tu email" required [(ngModel)]="email">
+        <input matInput type="email" placeholder="Tu email" required [(ngModel)]="email" [disabled]="enProceso">
         <mat-error>
-          Please provide a valid email address
+          Por favor ingrese su correo válida!!
         </mat-error>
       </mat-form-field>
-
-      <!-- <button mat-raised-button color="primary" [disabled]="!loginForm.form.valid" routerLink="/login">Recuperar contraseña</button> -->
-      <button mat-raised-button color="primary" (click)="enviar()" [disabled]="!email">Enviar correo</button>
-
-      <br>
-      <br>
-
       <mat-progress-bar mode="determinate" [value]="porcentaje"></mat-progress-bar>
 
       <br>
-      <a routerLink="/login">Ir a inicio</a>
-      <!-- <mat-toolbar *ngIf="mensaje">{{mensaje}}</mat-toolbar> -->
-      <!-- <mat-toolbar *ngIf="error">{{error}}</mat-toolbar> -->
-      <!-- </form> -->
+
+      <button mat-raised-button color="primary" [class.spinner]="enProceso" (click)="enviar()" [disabled]="!email || enProceso">
+        <span *ngIf="!enProceso">
+          Enviar correo
+        </span>
+      </button>
+
+      <br>
+      <br>
+
+      <button mat-raised-button routerLink="/login">Ir a inicio</button>
+
     </mat-card-content>
   </div>
   <router-outlet *ngIf="route.children.length !== 0"></router-outlet>

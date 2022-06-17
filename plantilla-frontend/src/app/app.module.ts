@@ -1,3 +1,4 @@
+import { LoginTokenComponent } from './login/login-token/login-token.component';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -23,7 +24,6 @@ import { LoginRecuperarComponent } from './login/login-recuperar/login-recuperar
 import { CdkTableModule } from '@angular/cdk/table';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginFormularioComponent } from './login/login-formulario/login-formulario.component';
-import { LoginTokenComponent } from './login/login-recuperar/login-token/login-token.component';
 
 @NgModule({
   declarations: [

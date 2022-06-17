@@ -25,7 +25,8 @@ export class LoginTokenComponent implements OnInit {
     private route: ActivatedRoute,
     private loginService: LoginService,
     private snack: MatSnackBar,
-  ) { }
+  ) {
+  }
 
 
   ngOnInit() {
@@ -36,15 +37,18 @@ export class LoginTokenComponent implements OnInit {
       validator: PasswordValidation.MatchPassword
     });
 
+    this.enProceso = true;
     this.route.params.subscribe((params: Params) => {
       this.token = params['token'];
       this.loginService.verificarTokenReset(this.token).subscribe(data => {
 
         if (data === 1) {
           this.tokenValido = true;
+          this.enProceso = false;
         } else {
           this.tokenValido = false;
           setTimeout(() => {
+            this.enProceso = false;
             this.router.navigate(['login']);
           }, 7000)
         }

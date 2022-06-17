@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
+import { Not404Component } from './features/error/not404/not404.component';
 
 import { FullComponent } from './layouts/full/full.component';
 import { LoginFormularioComponent } from './login/login-formulario/login-formulario.component';
 import { LoginIniciarComponent } from './login/login-iniciar/login-iniciar.component';
 import { LoginRecuperarComponent } from './login/login-recuperar/login-recuperar.component';
-import { LoginRegistrarComponent } from './login/login-registrar/login-registrar.component';
-import { LoginTokenComponent } from './login/login-recuperar/login-token/login-token.component';
+import { LoginTokenComponent } from './login/login-token/login-token.component';
 
 export const AppRoutes: Routes = [
   {
@@ -42,5 +42,15 @@ export const AppRoutes: Routes = [
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
       }
     ]
+  },
+
+  {
+    path: 'not-404',
+    component: Not404Component,
+    data: { title: 'not-404', breadcrumb: 'not-404' }
+  },
+  {
+    path: '**',
+    redirectTo: 'not-404'
   }
 ];
