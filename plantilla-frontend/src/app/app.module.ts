@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { LoginTokenComponent } from './login/login-token/login-token.component';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -24,7 +25,11 @@ import { LoginRecuperarComponent } from './login/login-recuperar/login-recuperar
 import { CdkTableModule } from '@angular/cdk/table';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginFormularioComponent } from './login/login-formulario/login-formulario.component';
+import { JwtModule } from '@auth0/angular-jwt';
 
+export function tokenGetter() {
+  return sessionStorage.getItem(environment.TOKEN_NAME);
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +53,14 @@ import { LoginFormularioComponent } from './login/login-formulario/login-formula
     SharedModule,
     RouterModule.forRoot(AppRoutes),
     ReactiveFormsModule,
-    CdkTableModule
+    CdkTableModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: [environment.HOST.substring(7)],
+        disallowedRoutes: [`http://${environment.HOST.substring(7)}/login/enviarCorreo`],
+      },
+    }),
   ],
   providers: [
     {

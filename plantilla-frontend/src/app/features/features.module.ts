@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CdkTableModule } from '@angular/cdk/table';
 import { Not404Component } from './error/not404/not404.component';
+import { Not403Component } from './error/not403/not403.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { Not404Component } from './error/not404/not404.component';
     UsuarioTarjetaComponent,
     UsuarioDialogoComponent,
     AuditoriaContenedorDetalleComponent,
-    Not404Component
+    Not404Component,
+    Not403Component
   ],
   imports: [
     CommonModule,
