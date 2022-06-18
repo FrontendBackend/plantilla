@@ -12,6 +12,7 @@ export class Not403Component implements OnInit {
   usuario: string;
 
   // npm install @auth0/angular-jwt --save
+  // https://www.npmjs.com/package/@auth0/angular-jwt
   constructor() { }
 
   ngOnInit() {
