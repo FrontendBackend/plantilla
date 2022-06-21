@@ -155,7 +155,22 @@ export class LoginService {
    */
   isAuthenticated(): boolean {
     let payload = this.obtenerDatosToken(this.token);
-    if (payload != null && payload.user_name && payload.user_name.length > 0) {
+    if (payload != null && payload.user_name && payload.user_name.length > 0 && !this.isTokenExpirado()) {
+      return true;
+    }
+    return false;
+  }
+
+ /**
+  * Si el token no es nulo y la fecha de vencimiento es anterior a la fecha actual, entonces el token
+  * está vencido
+  * @returns El token está siendo devuelto.
+  */
+  isTokenExpirado(): boolean {
+    let token = this.token;
+    let payload = this.obtenerDatosToken(token);
+    let now = new Date().getTime() / 1000;
+    if (payload !== null && payload.exp < now) {
       return true;
     }
     return false;

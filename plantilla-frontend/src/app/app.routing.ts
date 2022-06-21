@@ -6,6 +6,7 @@ import { LoginFormularioComponent } from './login/login-formulario/login-formula
 import { LoginIniciarComponent } from './login/login-iniciar/login-iniciar.component';
 import { LoginRecuperarComponent } from './login/login-recuperar/login-recuperar.component';
 import { LoginTokenComponent } from './login/login-token/login-token.component';
+import { GuardServiceService } from './services/guard-service.service';
 
 export const AppRoutes: Routes = [
   {
@@ -32,6 +33,7 @@ export const AppRoutes: Routes = [
   {
     path: '',
     component: FullComponent,
+    canActivate: [GuardServiceService],
     children: [
       {
         path: '',

@@ -5,15 +5,30 @@ export interface Menu {
   name: string;
   type: string;
   icon: string;
+  rol: string;
 }
 
 const MENUITEMS = [
-  { state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'av_timer' },
+  {
+    state: 'dashboard',
+    name: 'Dashboard',
+    type: 'link',
+    icon: 'av_timer',
+    rol: 'ADMIN'
+  },
+  {
+    state: 'dashboard',
+    name: 'Dashboard',
+    type: 'link',
+    icon: 'av_timer',
+    rol: 'USER'
+  },
   {
     state: 'auditoria',
     type: 'link',
     name: 'Auditoria',
-    icon: 'security'
+    icon: 'security',
+    rol: 'ADMIN'
   },
   // { state: 'button', type: 'link', name: 'Buttons', icon: 'crop_7_5' },
   // { state: 'grid', type: 'link', name: 'Grid List', icon: 'view_comfy' },
