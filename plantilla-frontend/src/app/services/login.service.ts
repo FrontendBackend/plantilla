@@ -56,14 +56,16 @@ export class LoginService {
     if (token) {
       this.http.get(`${environment.HOST}/tokens/anular/${token}`).subscribe(() => {
         sessionStorage.clear();
-        sessionStorage.removeItem('token');
-        sessionStorage.removeItem('usuario');
+        // sessionStorage.removeItem('token');
+        // sessionStorage.removeItem('usuario');
+        sessionStorage.removeItem(environment.TOKEN_NAME);
         this.router.navigate(['/login']);
       });
     } else {
       sessionStorage.clear();
-      sessionStorage.removeItem('token');
-      sessionStorage.removeItem('usuario');
+      // sessionStorage.removeItem('token');
+      // sessionStorage.removeItem('usuario');
+      sessionStorage.removeItem(environment.TOKEN_NAME);
       this.router.navigate(['/login']);
     }
   }
@@ -205,7 +207,7 @@ export class LoginService {
    */
   hasRole(role: string): boolean {
     if (this.usuario.roles.includes(role)) {
-      console.log(role);
+      // console.log(role);
 
       return true;
     }
