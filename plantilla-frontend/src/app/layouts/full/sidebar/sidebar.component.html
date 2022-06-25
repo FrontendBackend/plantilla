@@ -22,15 +22,26 @@
 
 </div>
 <mat-nav-list appAccordion>
+
+  <!-- Se muestra el menú DASHBOARD como principal -->
+  <mat-list-item appAccordionLink *ngFor="let dashboard of menuItems.getMenuitemDashboard()" routerLinkActive="selected" group="{{dashboard.state}}">
+
+      <a class="" appAccordionToggle [routerLink]="['/', dashboard.state]" *ngIf="dashboard.type === 'link'">
+          <mat-icon>{{ dashboard.icon }}</mat-icon>
+          <span>{{ dashboard.name }}</span>
+          <span fxFlex></span>
+      </a>
+
+  </mat-list-item>
+
+  <!-- Menus en general -->
     <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem()" routerLinkActive="selected" group="{{menuitem.state}}">
+
         <a class="" appAccordionToggle [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'link' && loginService.hasRole(menuitem.rol)">
             <mat-icon>{{ menuitem.icon }}</mat-icon>
             <span>{{ menuitem.name }}</span>
             <span fxFlex></span>
             <!-- <span class="label label-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span> -->
         </a>
-
-
     </mat-list-item>
-
 </mat-nav-list>

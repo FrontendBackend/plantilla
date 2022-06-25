@@ -1,5 +1,14 @@
 import { Injectable } from '@angular/core';
 
+/* Definición de una interfaz. */
+export interface MenuDashboard {
+  state: string;
+  name: string;
+  type: string;
+  icon: string;
+}
+
+/* Definición de una interfaz. */
 export interface Menu {
   state: string;
   name: string;
@@ -8,26 +17,31 @@ export interface Menu {
   rol: string;
 }
 
+/* Una constante que se utiliza para crear los elementos del menú. */
+const MENUITEMS_DASHBOARD = [
+  {
+    state: 'dashboard',
+    name: 'DASHBOARD',
+    type: 'link',
+    icon: 'av_timer',
+  },
+];
+
+/* Una constante que se utiliza para crear los elementos del menú. */
 const MENUITEMS = [
-  {
-    state: 'dashboard',
-    name: 'Dashboard',
-    type: 'link',
-    icon: 'av_timer',
-    rol: 'ADMIN'
-  },
-  {
-    state: 'dashboard',
-    name: 'Dashboard',
-    type: 'link',
-    icon: 'av_timer',
-    rol: 'USER'
-  },
+
   {
     state: 'auditoria',
     type: 'link',
-    name: 'Auditoria',
+    name: 'AUDITORIA',
     icon: 'security',
+    rol: 'ADMIN'
+  },
+  {
+    state: 'usuario',
+    type: 'link',
+    name: 'USUARIO',
+    icon: 'people',
     rol: 'ADMIN'
   },
   // { state: 'button', type: 'link', name: 'Buttons', icon: 'crop_7_5' },
@@ -74,9 +88,24 @@ const MENUITEMS = [
 
 ];
 
+
 @Injectable()
 export class MenuItems {
+
+  /**
+   * Devuelve una matriz de objetos MenuDashboard.
+   * @returns Una matriz de objetos MenuDashboard.
+   */
+  getMenuitemDashboard(): MenuDashboard[] {
+    return MENUITEMS_DASHBOARD;
+  }
+
+  /**
+   * Devuelve la matriz MENUITEMS.
+   * @returns Una matriz de objetos de menú.
+   */
   getMenuitem(): Menu[] {
     return MENUITEMS;
   }
 }
+

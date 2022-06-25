@@ -1,1 +1,39 @@
-<p>usuario-tarjeta works!</p>
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar>
+      <mat-icon>casino</mat-icon>
+    </div>
+    <mat-card-title>
+      {{ tblUsuarioDTO.username | uppercase }}
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{tblUsuarioDTO.correo}}
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div fxLayout="row">
+      <div fxLayout="row" class="text-muted p-line mat-caption" fxFlex>
+        <span class="text-muted p-line mat-caption">
+          {{tblUsuarioDTO.correo}}
+        </span>
+      </div>
+    </div>
+
+  </mat-card-content>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-actions fxLayout="row">
+    <div fxFlex align="start">
+      <button mat-icon-button mat-sm-button color="primary" class="mr-1" (click)="editarMatriz(tblUsuarioDTO.idUsuario)"
+        matTooltip="Editar" >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button mat-sm-button color="primary" class="mr-1" (click)="consultarMatriz(tblUsuarioDTO.idUsuario)"
+        matTooltip="Consultar">
+        <mat-icon fontSet="material-icons-outlined">visibility</mat-icon>
+      </button>
+    </div>
+  </mat-card-actions>
+</mat-card>

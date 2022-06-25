@@ -19,6 +19,15 @@ export class UsuarioService {
   }
 
   /**
+   * Devuelve un Observable de una matriz de objetos TblUsuario
+   * @returns Una matriz de objetos TblUsuario.
+   */
+  listarUsuarios(): Observable<TblUsuario[]> {
+    const endPoint = `${this.url}/listarUsuarios`;
+    return this.httpClient.get<TblUsuario[]>(endPoint, { headers: this.httpHeaders });
+  }
+
+  /**
    * Toma un objeto TblUsuario como parámetro, lo envía al backend y devuelve un objeto TblUsuario
    * @param {TblUsuario} tblUsuarioDTO - TblUsuario
    * @returns La respuesta se está devolviendo como un objeto con una clave de tblUsuarioDTOCreado.

@@ -15,6 +15,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CdkTableModule } from '@angular/cdk/table';
 import { Not404Component } from './error/not404/not404.component';
 import { Not403Component } from './error/not403/not403.component';
+import { UsuarioContenedorDetalleComponent } from './usuario/usuario-contenedor-detalle/usuario-contenedor-detalle.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { Not403Component } from './error/not403/not403.component';
     UsuarioDialogoComponent,
     AuditoriaContenedorDetalleComponent,
     Not404Component,
-    Not403Component
+    Not403Component,
+    UsuarioContenedorDetalleComponent
   ],
   imports: [
     CommonModule,

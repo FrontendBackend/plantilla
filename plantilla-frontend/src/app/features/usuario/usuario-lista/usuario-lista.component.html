@@ -1,1 +1,57 @@
-<p>usuario-lista works!</p>
+<div fxLayout="row" class="contenedor-myapp-formulario mat-elevation-z1 animated fadeInDown">
+  <mat-card-title>
+    <div>
+      <b>
+        <strong>Matrices</strong>
+      </b>
+    </div>
+  </mat-card-title>
+</div>
+
+<mat-divider></mat-divider>
+
+<div>
+
+  <mat-sidenav-container>
+
+    <!--Inicio contenido-->
+
+    <div class="content-wrap contenedor-myapp" fxLayout="row" fxLayoutWrap="wrap">
+
+      <div class="full-width">
+        <!--Inicio Barra de herramientas-->
+
+        <div fxLayout="column">
+
+          <div fxLayout="row" fxLayoutGap="20px" fxLayout.lt-sm="column" class="interior-top-toolbar cant-registros">
+            <div fxFlex>
+              <mat-label class="mat-caption">
+                N° de registros: {{ cantidadRegistros }}
+              </mat-label>
+            </div>
+          </div>
+        </div>
+        <!--Fin de Barra de herramientas-->
+
+        <mat-divider></mat-divider>
+        <br />
+        <br />
+        <br />
+        <!--Inicio contenido de tarjetas-->
+        <div *ngIf="!enProceso" class="items-container">
+
+          <div class="item-content-wrap" *ngFor="let tblUsuarioDTO of lTblUsuarioDTO; let i = index "
+            [@animate]="{ value: '*',params: { delay: i * 100 + 'ms', y: '50px' } }" fxFlex="0 1 calc(33.3%)"
+            fxFlex.lg="0 1 calc(50%)" fxFlex.lt-lg="0 1 calc(50%)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="100%">
+            <app-usuario-tarjeta [tblUsuarioDTO]="tblUsuarioDTO"></app-usuario-tarjeta>
+          </div>
+        </div>
+        <!--Fin de contentenido de tarjeas-->
+      </div>
+
+    </div>
+    <!--Fin contentenido-->
+
+  </mat-sidenav-container>
+
+</div>
