@@ -236,4 +236,72 @@ public class UsuarioController extends BaseController {
 
         return new ResponseEntity<Map<String, Object>>(respuesta, HttpStatus.CREATED);
     }
+
+    /**
+     * Me permite validar la existencia de un usuario ya registrado
+     * @param idUsuario
+     * @param username
+     * @return
+     */
+    @GetMapping("/existeUsuario/{idUsuario}/{username}")
+    public ResponseEntity<?> existeUsuario(@PathVariable Long idUsuario, @PathVariable String username) {
+
+        Map<String, Object> respuesta = new HashMap<>();
+        List<TblUsuarioDTO> lTblUsuarioDTO = null;
+
+        if (idUsuario == 0) {
+            idUsuario = null;
+        }
+
+        try {
+            lTblUsuarioDTO = this.usuarioService.existeUsuario(idUsuario, username.toUpperCase());
+
+        } catch (DataAccessException e) {
+            respuesta.put("mensaje", "Ocurrió un error al realizar verificar si ya exite " + "un usuario del sistema");
+            respuesta.put("error", e.getMostSpecificCause().getMessage());
+
+            log.error(e.getMostSpecificCause().getMessage(), e);
+
+            return new ResponseEntity<Map<String, Object>>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        respuesta.put("mensaje", "Si fue posible determinar la existencia de " + "un usuario del sistema");
+        respuesta.put("lTblUsuarioDTO", lTblUsuarioDTO);
+
+        return new ResponseEntity<Map<String, Object>>(respuesta, HttpStatus.OK);
+    }
+
+    /**
+     * Me permite validar la existencia de los correos ya registrados
+     * @param idUsuario
+     * @param username
+     * @return
+     */
+    @GetMapping("/existeCorreo/{idUsuario}/{correo}")
+    public ResponseEntity<?> existeCorreo(@PathVariable Long idUsuario, @PathVariable String correo) {
+
+        Map<String, Object> respuesta = new HashMap<>();
+        List<TblUsuarioDTO> lTblUsuarioDTO = null;
+
+        if (idUsuario == 0) {
+            idUsuario = null;
+        }
+
+        try {
+            lTblUsuarioDTO = this.usuarioService.existeCorreo(idUsuario, correo.toUpperCase());
+
+        } catch (DataAccessException e) {
+            respuesta.put("mensaje", "Ocurrió un error al realizar verificar si ya exite " + "un correo del sistema");
+            respuesta.put("error", e.getMostSpecificCause().getMessage());
+
+            log.error(e.getMostSpecificCause().getMessage(), e);
+
+            return new ResponseEntity<Map<String, Object>>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        respuesta.put("mensaje", "Si fue posible determinar la existencia de " + "un correo del sistema");
+        respuesta.put("lTblUsuarioDTO", lTblUsuarioDTO);
+
+        return new ResponseEntity<Map<String, Object>>(respuesta, HttpStatus.OK);
+    }
 }

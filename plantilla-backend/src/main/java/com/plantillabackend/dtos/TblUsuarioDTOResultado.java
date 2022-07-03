@@ -15,4 +15,22 @@ public class TblUsuarioDTOResultado extends TblUsuarioDTO {
         this.setPassword(password);
         this.setEnabled(enabled);
     }
+    
+    /**
+     * @see com.plantillabackend.models.repository.UsuarioRepository#existeUsuario
+     */
+    public TblUsuarioDTOResultado (Long idUsuario, String username) {
+        super();
+        this.setIdUsuario(idUsuario);
+        this.setUsername(username);
+    }
+
+    /**
+     * @see com.plantillabackend.models.repository.UsuarioRepository#existeCorreo
+     */
+    public TblUsuarioDTOResultado (Long idUsuario, String correo, String indefinido) {
+        super();
+        this.setIdUsuario(idUsuario);
+        this.setCorreo(correo);
+    }
 }

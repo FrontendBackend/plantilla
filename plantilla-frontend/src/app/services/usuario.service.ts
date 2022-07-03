@@ -2,8 +2,9 @@ import { TblUsuario } from './../models/tbl-usuario';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -64,6 +65,82 @@ export class UsuarioService {
    */
   obtenerConfiguracionesGenerales(idUsuario: number): Observable<any> {
     const urlEndPoint = `${this.url}/obtenerConfiguracionesGenerales/${idUsuario}`;
+    return this.httpClient.get<any[]>(urlEndPoint);
+  }
+
+  /**
+   * Me permite validar la existencia de un usuario ya registrado
+   * @param idUsuario
+   */
+   noUsuarioValidator(idUsuario: number): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      const username = control.value;
+
+      if (!username) {
+        return of(null);
+      }
+
+      return this.yaExisteUsuario(idUsuario, username).pipe(
+        map(respuesta => {
+          const claveLista = 'lTblUsuarioDTO';
+          const lTblUsuarioDTO = respuesta[claveLista] as TblUsuario[];
+
+          if (lTblUsuarioDTO.length > 0) {
+            return { usernameExiste: true };
+          }
+          else {
+            return null;
+          }
+        })
+      );
+    };
+  }
+
+  /**
+   * Me permite validar la existencia de un usuario ya registrado
+   * @param idUsuario
+   */
+  yaExisteUsuario(idUsuario: number, username: string): Observable<any> {
+    const urlEndPoint = `${this.url}/existeUsuario/${idUsuario}/${username}`;
+
+    return this.httpClient.get<any[]>(urlEndPoint);
+  }
+
+  /**
+   * Me permite validar la existencia de los correos ya registrados
+   * @param idUsuario
+   */
+   correoValidator(idUsuario: number): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      const correo = control.value;
+
+      if (!correo) {
+        return of(null);
+      }
+
+      return this.yaExisteCorreo(idUsuario, correo).pipe(
+        map(respuesta => {
+          const claveLista = 'lTblUsuarioDTO';
+          const lTblUsuarioDTO = respuesta[claveLista] as TblUsuario[];
+
+          if (lTblUsuarioDTO.length > 0) {
+            return { correoExiste: true };
+          }
+          else {
+            return null;
+          }
+        })
+      );
+    };
+  }
+
+  /**
+   * Me permite validar la existencia de los correos ya registrados
+   * @param idUsuario
+   */
+   yaExisteCorreo(idUsuario: number, correo: string): Observable<any> {
+    const urlEndPoint = `${this.url}/existeCorreo/${idUsuario}/${correo}`;
+
     return this.httpClient.get<any[]>(urlEndPoint);
   }
 }

@@ -64,4 +64,20 @@ public interface UsuarioService {
      * @return Un objeto TblUsuario.
      */
     TblUsuario findById(Long idUsuario);
+
+    /**
+     * Me permite validar la existencia de un usuario ya registrado
+     * @param idUsuario
+     * @param username
+     * @return
+     */
+    public List<TblUsuarioDTO> existeUsuario(Long idUsuario, String username);
+
+    /**
+     * Me permite validar la existencia de los correos ya registrados
+     * @param idUsuario
+     * @param correo
+     * @return
+     */
+    public List<TblUsuarioDTO> existeCorreo(Long idUsuario, String correo);
 }

@@ -64,4 +64,38 @@ public interface UsuarioRepository extends GenericRepository<TblUsuario, Long> {
             + "WHERE usu.idUsuario = :idUsuario "
             )
     TblUsuarioDTO obtenerUsuarioPorId(@Param("idUsuario") Long idUsuario);
+
+    /**
+     * Me permite validar la existencia de un usuario ya registrado
+     * @param idUsuario
+     * @param username
+     * @return
+     */
+    @Query("SELECT new com.plantillabackend.dtos.TblUsuarioDTOResultado(" 
+			+ "usu.idUsuario, " 
+			+ "TRIM(UPPER(usu.username)) " 
+			+ " ) " 
+			+ "FROM TblUsuario usu "
+			+ "WHERE usu.esRegistro = '1' " 
+			+ "AND (:idUsuario IS NULL OR usu.idUsuario != :idUsuario) "
+			+ "AND TRIM(UPPER(usu.username)) = :username "
+			+ " ")
+    List<TblUsuarioDTO> existeUsuario(@Param("idUsuario") Long idUsuario, @Param("username") String username);
+
+    /**
+     * Me permite validar la existencia de los correos ya registrados
+     * @param idUsuario
+     * @param correo
+     * @return
+     */
+    @Query("SELECT new com.plantillabackend.dtos.TblUsuarioDTOResultado(" 
+			+ "usu.idUsuario, " 
+			+ "TRIM(UPPER(usu.correo)) " 
+			+ " ) " 
+			+ "FROM TblUsuario usu "
+			+ "WHERE usu.esRegistro = '1' " 
+			+ "AND (:idUsuario IS NULL OR usu.idUsuario != :idUsuario) "
+			+ "AND TRIM(UPPER(usu.correo)) = :correo "
+			+ " ")
+    List<TblUsuarioDTO> existeCorreo(@Param("idUsuario") Long idUsuario, @Param("correo") String correo);
 }

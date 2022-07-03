@@ -219,4 +219,30 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
     public TblUsuario findById(Long idUsuario) {
         return repo.findById(idUsuario).orElse(null);
     }
+
+    /**
+     * Me permite validar la existencia de un usuario ya registrado
+     * @param idUsuario
+     * @param username
+     * @return
+     */
+    @Override
+	public List<TblUsuarioDTO> existeUsuario(Long idUsuario, String username) {
+
+		List<TblUsuarioDTO> lTblUsuarioDTO = this.repo.existeUsuario(idUsuario, username.toUpperCase());
+		return lTblUsuarioDTO;
+	}
+
+    /**
+     * Me permite validar la existencia de los correos ya registrados
+     * @param idUsuario
+     * @param correo
+     * @return
+     */
+    @Override
+	public List<TblUsuarioDTO> existeCorreo(Long idUsuario, String correo) {
+
+		List<TblUsuarioDTO> lTblUsuarioDTO = this.repo.existeCorreo(idUsuario, correo.toUpperCase());
+		return lTblUsuarioDTO;
+	}
 }
