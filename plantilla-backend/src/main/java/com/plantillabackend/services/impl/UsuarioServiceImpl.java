@@ -15,6 +15,7 @@ import com.plantillabackend.dtos.AuditoriaDTO;
 import com.plantillabackend.dtos.TblUsuarioDTO;
 import com.plantillabackend.models.entity.TblUsuario;
 import com.plantillabackend.models.repository.UsuarioRepository;
+import com.plantillabackend.services.UsuarioRolService;
 import com.plantillabackend.services.UsuarioService;
 import com.plantillabackend.utils.ConstantesUtil;
 
@@ -35,6 +36,9 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 
     @Autowired
     private BCryptPasswordEncoder bcrypt;
+
+    @Autowired
+    private UsuarioRolService usuarioRolService;
     
     /**
      * Toma un nombre de usuario, encuentra al usuario en la base de datos y
@@ -151,6 +155,8 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
         tblUsuario.setIpCreacion("127.0.0.0");
 
         TblUsuario tblUsuarioCreado = this.repo.save(tblUsuario);
+
+        this.usuarioRolService.crearUsuarioRol(tblUsuario);
 
         TblUsuarioDTO tblUsuarioDTOCreado = this.obtenerUsuarioPorId(tblUsuarioCreado.getIdUsuario());
 
