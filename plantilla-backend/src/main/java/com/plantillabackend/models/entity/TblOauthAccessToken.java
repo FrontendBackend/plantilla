@@ -43,6 +43,6 @@ public class TblOauthAccessToken implements Serializable {
     private Blob autenticacion;
 
     // Una columna en la base de datos.
-    @Column(name = "REFRESH_TOKEN", nullable = false, length = 256)
+    @Column(name = "REFRESH_TOKEN", nullable = true, length = 256)
     private String refreshToken;
 }

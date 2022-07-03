@@ -207,7 +207,7 @@ export class LoginService {
    */
   hasRole(role: string): boolean {
     if (this.usuario.roles.includes(role)) {
-      // console.log(role);
+      console.log(role);
 
       return true;
     }

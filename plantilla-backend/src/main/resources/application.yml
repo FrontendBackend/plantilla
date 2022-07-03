@@ -13,8 +13,8 @@ spring:
       ddl-auto: update
   datasource:
     url: jdbc:oracle:thin:@localhost:1521:xe
-    username: plantilla
-    password: plantilla
+    username: PLANTILLA
+    password: PLANTILLA
     driver-class-name: oracle.jdbc.OracleDriver
     hikari:
       connection-timeout: 60000

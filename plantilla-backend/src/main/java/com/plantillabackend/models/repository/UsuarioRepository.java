@@ -29,7 +29,7 @@ public interface UsuarioRepository extends GenericRepository<TblUsuario, Long> {
             + "usu.idUsuario, usu.username, usu.correo, usu.password, usu.enabled "
             + " ) "
             + "FROM TblUsuario usu "
-            // + "WHERE usu.esRegistro = '1' "
+            + "WHERE usu.esRegistro = '1' "
             )
     List<TblUsuarioDTO> listarUsuarios();
 
