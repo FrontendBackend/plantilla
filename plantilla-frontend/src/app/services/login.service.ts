@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { TblUsuario } from '../models/tbl-usuario';
+import { TblUsuario } from '../models/TblUsuarioDTO';
 
 @Injectable({
   providedIn: 'root'

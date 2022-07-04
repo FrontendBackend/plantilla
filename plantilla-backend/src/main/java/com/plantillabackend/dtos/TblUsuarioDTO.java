@@ -52,4 +52,11 @@ public class TblUsuarioDTO {
 
     // Esta es una relación de muchos a muchos entre el usuario y el rol.
     private List<TblRol> roles;
+
+    /**
+     * Variables auxiliares
+     */
+
+    // Campo id de la tabla rol
+    private Long descIdRol;
 }

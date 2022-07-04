@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.plantillabackend.dtos.TblRolDTO;
 import com.plantillabackend.dtos.TblUsuarioDTO;
 import com.plantillabackend.models.entity.TblUsuario;
+import com.plantillabackend.services.RolService;
 import com.plantillabackend.services.UsuarioService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +35,9 @@ public class UsuarioController extends BaseController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private RolService rolService;
 
     /**
      * Devuelve una lista de usuarios en la base de datos.
@@ -138,15 +143,19 @@ public class UsuarioController extends BaseController {
      * @param idUsuario 1
      * @return Un objeto ResponseEntity.
      */
-    @GetMapping("/obtenerConfiguracionesGenerales/{idUsuario}")
-    public ResponseEntity<?> obtenerConfiguracionesGenerales(@PathVariable Long idUsuario) {
+    @GetMapping("/obtenerUsuarioPorId/{idUsuario}")
+    public ResponseEntity<?> obtenerUsuarioPorId(@PathVariable Long idUsuario) {
         String mensaje;
         Map<String, Object> respuesta = new HashMap<>();
 
         TblUsuarioDTO tblUsuarioDTO = null;
+        List<TblRolDTO> lTblRolDTOListarRoles = null;
 
         try {
+
             tblUsuarioDTO = this.usuarioService.obtenerUsuarioPorId(idUsuario);
+            lTblRolDTOListarRoles = this.rolService.listarRol();
+
         } catch (DataAccessException e) {
             respuesta.put("mensaje", "Ocurrió un error al intentar recuperar el usuario");
             respuesta.put("error", e.getMostSpecificCause().getMessage());
@@ -163,6 +172,35 @@ public class UsuarioController extends BaseController {
 
         respuesta.put("mensaje", "El usuario ha sido recuperado");
         respuesta.put("tblUsuarioDTO", tblUsuarioDTO);
+        respuesta.put("lTblRolDTOListarRoles", lTblRolDTOListarRoles);
+
+        return new ResponseEntity<Map<String, Object>>(respuesta, HttpStatus.OK);
+    }
+
+    /**
+     * Me devuelve la lista de configuraciones en la cual esta incorporado los roles y otros
+     * @return
+     */
+    @GetMapping("/obtenerConfiguracionesGenerales")
+    public ResponseEntity<?> obtenerConfiguracionesGenerales() {
+
+        Map<String, Object> respuesta = new HashMap<>();
+
+        List<TblRolDTO> lTblRolDTOListarRoles = null;
+
+        try {
+
+            lTblRolDTOListarRoles = this.rolService.listarRol();
+
+        } catch (DataAccessException e) {
+            respuesta.put("mensaje", "Ocurrió un error al intentar recuperar los parametros");
+            respuesta.put("error", e.getMostSpecificCause().getMessage());
+            log.error(e.getMostSpecificCause().getMessage());
+            return new ResponseEntity<Map<String, Object>>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        respuesta.put("mensaje", "El parametros ha sido recuperado");
+        respuesta.put("lTblRolDTOListarRoles", lTblRolDTOListarRoles);
 
         return new ResponseEntity<Map<String, Object>>(respuesta, HttpStatus.OK);
     }

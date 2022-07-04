@@ -2,7 +2,7 @@
   <mat-card-title>
     <div>
       <b>
-        <strong>Matrices</strong>
+        <strong>Usuarios</strong>
       </b>
     </div>
   </mat-card-title>
@@ -10,48 +10,52 @@
 
 <mat-divider></mat-divider>
 
-<div>
+<mat-sidenav-container>
 
-  <mat-sidenav-container>
+  <!--Inicio contenido-->
 
-    <!--Inicio contenido-->
+  <div class="content-wrap contenedor-myapp" fxLayoutWrap="wrap">
 
-    <div class="content-wrap contenedor-myapp" fxLayout="row" fxLayoutWrap="wrap">
+    <div class="full-width">
+      <!--Inicio Barra de herramientas-->
 
-      <div class="full-width">
-        <!--Inicio Barra de herramientas-->
+      <div fxLayout="column">
 
-        <div fxLayout="column">
-
-          <div fxLayout="row" fxLayoutGap="20px" fxLayout.lt-sm="column" class="interior-top-toolbar cant-registros">
-            <div fxFlex>
-              <mat-label class="mat-caption">
-                N° de registros: {{ cantidadRegistros }}
-              </mat-label>
-            </div>
+        <div fxLayout="row" fxLayoutGap="20px" fxLayout.lt-sm="column" class="interior-top-toolbar cant-registros">
+          <div fxFlex>
+            <mat-label class="mat-caption">
+              N° de registros: {{ cantidadRegistros }}
+            </mat-label>
           </div>
         </div>
-        <!--Fin de Barra de herramientas-->
+      </div>
+      <!--Fin de Barra de herramientas-->
 
-        <mat-divider></mat-divider>
-        <br />
-        <br />
-        <br />
-        <!--Inicio contenido de tarjetas-->
-        <div *ngIf="!enProceso" class="items-container">
 
-          <div class="item-content-wrap" *ngFor="let tblUsuarioDTO of lTblUsuarioDTO; let i = index "
-            [@animate]="{ value: '*',params: { delay: i * 100 + 'ms', y: '50px' } }" fxFlex="0 1 calc(33.3%)"
-            fxFlex.lg="0 1 calc(50%)" fxFlex.lt-lg="0 1 calc(50%)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="100%">
-            <app-usuario-tarjeta [tblUsuarioDTO]="tblUsuarioDTO"></app-usuario-tarjeta>
-          </div>
-        </div>
-        <!--Fin de contentenido de tarjeas-->
+      <mat-divider></mat-divider>
+
+      <mat-progress-bar *ngIf="enProceso" color="primary" mode="query"></mat-progress-bar>
+      <br />
+      <br />
+      <br />
+      <!--Inicio contenido de tarjetas-->
+
+      <div class="alerta alerta-warning animated fadeInDown" *ngIf="lTblUsuarioDTO?.length == 0">
+        Sin registros para mostrar
       </div>
 
+      <div *ngIf="!enProceso" class="items-container">
+
+        <div class="item-content-wrap" *ngFor="let tblUsuarioDTO of lTblUsuarioDTO; let i = index "
+          [@animate]="{ value: '*',params: { delay: i * 100 + 'ms', y: '50px' } }" fxFlex="0 1 calc(33.3%)"
+          fxFlex.lg="0 1 calc(50%)" fxFlex.lt-lg="0 1 calc(50%)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="100%">
+          <app-usuario-tarjeta [tblUsuarioDTO]="tblUsuarioDTO"></app-usuario-tarjeta>
+        </div>
+      </div>
+      <!--Fin de contentenido de tarjeas-->
     </div>
-    <!--Fin contentenido-->
 
-  </mat-sidenav-container>
+  </div>
+  <!--Fin contentenido-->
 
-</div>
+</mat-sidenav-container>

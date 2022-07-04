@@ -156,7 +156,7 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 
         TblUsuario tblUsuarioCreado = this.repo.save(tblUsuario);
 
-        this.usuarioRolService.crearUsuarioRol(tblUsuario);
+        this.usuarioRolService.crearUsuarioRol(tblUsuario, tblUsuarioDTO);
 
         TblUsuarioDTO tblUsuarioDTOCreado = this.obtenerUsuarioPorId(tblUsuarioCreado.getIdUsuario());
 

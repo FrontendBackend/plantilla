@@ -1,4 +1,4 @@
-import { TblUsuario } from './../../../models/tbl-usuario';
+import { TblUsuario } from '../../../models/TblUsuarioDTO';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';

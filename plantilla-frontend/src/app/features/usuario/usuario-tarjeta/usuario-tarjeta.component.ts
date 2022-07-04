@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 import { ETipoAccionCRUD } from 'src/app/models/tipo-accion';
-import { TblUsuario } from 'src/app/models/tbl-usuario';
+import { TblUsuario } from 'src/app/models/TblUsuarioDTO';
 
 @Component({
   selector: 'app-usuario-tarjeta',

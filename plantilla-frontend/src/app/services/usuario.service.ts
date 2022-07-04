@@ -1,4 +1,4 @@
-import { TblUsuario } from './../models/tbl-usuario';
+import { TblUsuario } from '../models/TblUsuarioDTO';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -43,11 +43,11 @@ export class UsuarioService {
       );
   }
 
- /**
-  * Toma un objeto TblUsuario como parámetro, lo envía al backend y devuelve un objeto TblUsuario
-  * @param {TblUsuario} tblUsuarioDTO - TblUsuario
-  * @returns La respuesta se está devolviendo como un objeto con una clave de tblUsuarioDTOCreado.
-  */
+  /**
+   * Toma un objeto TblUsuario como parámetro, lo envía al backend y devuelve un objeto TblUsuario
+   * @param {TblUsuario} tblUsuarioDTO - TblUsuario
+   * @returns La respuesta se está devolviendo como un objeto con una clave de tblUsuarioDTOCreado.
+   */
   crearUsuarioExterno(tblUsuarioDTO: TblUsuario): Observable<TblUsuario> {
     const urlEndPoint = `${this.url}/crearUsuarioExterno`;
     const clave = 'tblUsuarioDTOCreado';
@@ -63,8 +63,17 @@ export class UsuarioService {
    * @param {number} idUsuario - número
    * @returns una matriz de objetos.
    */
-  obtenerConfiguracionesGenerales(idUsuario: number): Observable<any> {
-    const urlEndPoint = `${this.url}/obtenerConfiguracionesGenerales/${idUsuario}`;
+  obtenerUsuarioPorId(idUsuario: number): Observable<any> {
+    const urlEndPoint = `${this.url}/obtenerUsuarioPorId/${idUsuario}`;
+    return this.httpClient.get<any[]>(urlEndPoint);
+  }
+
+  /**
+   * Me devuelve la lista de configuraciones en la cual esta incorporado los roles y otros
+   * @returns
+   */
+  obtenerConfiguracionesGenerales(): Observable<any> {
+    const urlEndPoint = `${this.url}/obtenerConfiguracionesGenerales`;
     return this.httpClient.get<any[]>(urlEndPoint);
   }
 
@@ -72,7 +81,7 @@ export class UsuarioService {
    * Me permite validar la existencia de un usuario ya registrado
    * @param idUsuario
    */
-   noUsuarioValidator(idUsuario: number): AsyncValidatorFn {
+  noUsuarioValidator(idUsuario: number): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       const username = control.value;
 
@@ -110,7 +119,7 @@ export class UsuarioService {
    * Me permite validar la existencia de los correos ya registrados
    * @param idUsuario
    */
-   correoValidator(idUsuario: number): AsyncValidatorFn {
+  correoValidator(idUsuario: number): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       const correo = control.value;
 
@@ -138,7 +147,7 @@ export class UsuarioService {
    * Me permite validar la existencia de los correos ya registrados
    * @param idUsuario
    */
-   yaExisteCorreo(idUsuario: number, correo: string): Observable<any> {
+  yaExisteCorreo(idUsuario: number, correo: string): Observable<any> {
     const urlEndPoint = `${this.url}/existeCorreo/${idUsuario}/${correo}`;
 
     return this.httpClient.get<any[]>(urlEndPoint);

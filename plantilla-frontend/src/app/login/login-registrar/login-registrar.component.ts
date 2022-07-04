@@ -1,5 +1,5 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { TblUsuario } from './../../models/tbl-usuario';
+import { TblUsuario } from '../../models/TblUsuarioDTO';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AbstractControl, FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { ETipoAccionCRUD } from 'src/app/models/tipo-accion';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { PasswordValidation } from 'src/app/models/match';
+import { TblRolDTO } from 'src/app/models/TblRolDTO';
 
 @Component({
   selector: 'app-login-registrar',
@@ -16,11 +17,11 @@ import { PasswordValidation } from 'src/app/models/match';
 })
 export class LoginRegistrarComponent implements OnInit {
 
-  form: FormGroup = new FormGroup({});
+  form: FormGroup;
 
   @Input() tblUsuarioDTO: TblUsuario;
 
-  lTblUsuarioDTO: TblUsuario[];
+  lTblRolDTOListarRoles: TblRolDTO[];
 
   enProceso = false;
 
@@ -50,6 +51,7 @@ export class LoginRegistrarComponent implements OnInit {
       {
         username: [null],
         correo: [null],
+        descIdRol: [null],
         password: [null],
         confirmarPassword: [null],
       },
@@ -58,28 +60,21 @@ export class LoginRegistrarComponent implements OnInit {
       }
     );
 
-    this.iniciarFormulario();
+    this.configurarInicio();
   }
 
   configurarInicio() {
     this.enProceso = true;
 
-    let idUsuario = 0;
+    this.usuarioService.obtenerConfiguracionesGenerales().subscribe((respuesta: any) => {
 
-    if (this.tblUsuarioDTO.idUsuario) {
-      idUsuario = this.tblUsuarioDTO.idUsuario;
-    }
-
-    this.usuarioService.obtenerConfiguracionesGenerales(idUsuario).subscribe((respuesta: any) => {
-      const claveSustancia = 'tblUsuarioDTO';
-
-      this.lTblUsuarioDTO = respuesta[claveSustancia];
-
+      this.lTblRolDTOListarRoles = respuesta['lTblRolDTOListarRoles'];
 
       this.iniciarFormulario();
       this.enProceso = false;
     });
   }
+
 
   iniciarFormulario(): void {
     this.enProceso = true;
@@ -98,6 +93,7 @@ export class LoginRegistrarComponent implements OnInit {
         updateOn: 'change'
         // updateOn: 'blur'
       }],
+      descIdRol: [this.tblUsuarioDTO.descIdRol, [Validators.required]],
       password: ['', [Validators.required]],
       confirmarPassword: [this.tblUsuarioDTO.password, [Validators.required]],
     },

@@ -12,7 +12,7 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Usuario</mat-label>
-        <input matInput type="text" maxlength="25" formControlName="username">
+        <input matInput type="text" maxlength="25" formControlName="username" autocomplete="off">
         <mat-progress-bar uppercase *ngIf="form.controls['username'].pending" mode="buffer">
         </mat-progress-bar>
         <mat-error *ngIf="form.get('username').errors?.usernameExiste">
@@ -25,7 +25,7 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Correo de recuperación</mat-label>
-        <input matInput type="text" maxlength="50" formControlName="correo">
+        <input matInput type="text" maxlength="50" formControlName="correo" autocomplete="off">
         <mat-progress-bar uppercase *ngIf="form.controls['correo'].pending" mode="buffer">
         </mat-progress-bar>
         <mat-error *ngIf="form.get('correo').errors?.correoExiste">
@@ -41,20 +41,19 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Roles</mat-label>
-        <mat-select>
-          <!-- <mat-option *ngFor="let food of foods" [value]="food.value"> -->
-          <mat-option>
-            User
-          </mat-option>
-          <mat-option>
-            Administrador
+        <mat-select formControlName="descIdRol" autocomplete="off" [class.is-invalid]="tieneError('descIdRol', 'any')">
+          <mat-option *ngFor="let roles of lTblRolDTOListarRoles" [value]="roles.idRol">
+            {{roles.nombre}}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="tieneError('descIdRol', 'required')">
+          Es requerido
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Clave</mat-label>
-        <input matInput maxlength="25" type="password" formControlName="password" [formGroup]="form" [disabled]="enProceso" required>
+        <input matInput maxlength="25" type="password" autocomplete="off" formControlName="password" [formGroup]="form" [disabled]="enProceso" required>
         <mat-error>
           Por favor ingrese su clave válida!!
         </mat-error>
@@ -62,7 +61,7 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Confirmar clave</mat-label>
-        <input matInput maxlength="25" type="password" formControlName="confirmarPassword" [formGroup]="form" [disabled]="enProceso" required>
+        <input matInput maxlength="25" type="password" autocomplete="off" formControlName="confirmarPassword" [formGroup]="form" [disabled]="enProceso" required>
         <mat-error>
           Por favor confirme nuevamente su clave válida!!
         </mat-error>

@@ -20,8 +20,13 @@ public class RolController extends BaseController {
     @Autowired
     private RolService rolService;
 
+    /**
+     * Me permite listar los roles
+     * @return
+     * @throws Exception
+     */
     @GetMapping("/listarRoles")
-    public ResponseEntity<List<TblRolDTO>> listarRol() throws Exception {
+    public ResponseEntity<List<TblRolDTO>> listarRoles() throws Exception {
         List<TblRolDTO> lLegRolDTO = new ArrayList<>();
         lLegRolDTO = rolService.listarRol();
         return new ResponseEntity<List<TblRolDTO>>(lLegRolDTO, HttpStatus.OK);

@@ -6,7 +6,7 @@ import com.plantillabackend.models.entity.TblUsuario;
 
 public interface UsuarioRolService {
 
-    public TblUsuarioTblRolDTO crearUsuarioRol(TblUsuario tblUsuario) throws Exception;
+    public TblUsuarioTblRolDTO crearUsuarioRol(TblUsuario tblUsuario, TblUsuarioDTO tblUsuarioDTO) throws Exception;
 
     TblUsuarioTblRolDTO obtenerUsuarioRolPorId(Long idUsuarioIdRol);
 }

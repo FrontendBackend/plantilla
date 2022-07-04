@@ -24,7 +24,7 @@ public class UsuarioRolServiceImpl implements UsuarioRolService{
     
     @Override
     @Transactional(readOnly = false)
-    public TblUsuarioTblRolDTO crearUsuarioRol(TblUsuario tblUsuario) throws Exception {
+    public TblUsuarioTblRolDTO crearUsuarioRol(TblUsuario tblUsuario, TblUsuarioDTO tblUsuarioDTO) throws Exception {
 
         TblUsuarioTblRol tblUsuarioTblRol = new TblUsuarioTblRol();
 
@@ -32,8 +32,8 @@ public class UsuarioRolServiceImpl implements UsuarioRolService{
         tblUsuarioTblRol.getTblUsuario().setIdUsuario(tblUsuario.getIdUsuario());
         
         tblUsuarioTblRol.setTblRol(new TblRol());
-        tblUsuarioTblRol.getTblRol().setIdRol(1L);
-        // tblUsuarioTblRol.getTblRol().setIdRol(tblUsuarioDTO.getIdUsuario());
+        // tblUsuarioTblRol.getTblRol().setIdRol(1L);
+        tblUsuarioTblRol.getTblRol().setIdRol(tblUsuarioDTO.getDescIdRol());
 
         TblUsuarioTblRol tblUsuarioTblRolCreado = this.usuarioRolRepository.save(tblUsuarioTblRol);
 

@@ -11,4 +11,6 @@ export class TblUsuario {
   enabled: boolean;
 
   roles: string[] = [];
+
+  descIdRol: number;
 }

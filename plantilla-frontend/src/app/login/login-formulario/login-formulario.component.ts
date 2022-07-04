@@ -1,5 +1,5 @@
 import { UsuarioService } from './../../services/usuario.service';
-import { TblUsuario } from './../../models/tbl-usuario';
+import { TblUsuario } from '../../models/TblUsuarioDTO';
 import { Component, OnInit } from '@angular/core';
 import { ETipoAccionCRUD } from 'src/app/models/tipo-accion';
 import { ActivatedRoute, Router } from '@angular/router';
