@@ -16,7 +16,6 @@ export class GuardServiceService implements CanActivate {
   constructor(
     private loginService: LoginService,
     // private menuService: MenuService,
-    private router: Router
   ) { }
 
   /**
@@ -29,7 +28,6 @@ export class GuardServiceService implements CanActivate {
 
     if (!this.loginService.isAuthenticated()) {
       this.loginService.cerrarSesion();
-      this.router.navigate(['/login']);
       return false;
     }
     return true;

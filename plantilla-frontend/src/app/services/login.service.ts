@@ -51,6 +51,12 @@ export class LoginService {
    * redirige al usuario a la página de inicio de sesión.
    */
   cerrarSesion() {
+    this._token = null;
+    this._usuario = null;
+    sessionStorage.clear();
+    sessionStorage.removeItem(environment.TOKEN_NAME);
+    this.router.navigate(['/login']);
+
     // let token = sessionStorage.getItem(environment.TOKEN_NAME);
 
     // if (token) {
@@ -68,11 +74,6 @@ export class LoginService {
     //   sessionStorage.removeItem(environment.TOKEN_NAME);
     //   this.router.navigate(['/login']);
     // }
-    this._token = null;
-    this._usuario = null;
-    sessionStorage.clear();
-    sessionStorage.removeItem(environment.TOKEN_NAME);
-    this.router.navigate(['/login']);
   }
 
  /**
