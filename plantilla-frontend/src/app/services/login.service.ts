@@ -51,23 +51,28 @@ export class LoginService {
    * redirige al usuario a la página de inicio de sesión.
    */
   cerrarSesion() {
-    let token = sessionStorage.getItem(environment.TOKEN_NAME);
+    // let token = sessionStorage.getItem(environment.TOKEN_NAME);
 
-    if (token) {
-      this.http.get(`${environment.HOST}/tokens/anular/${token}`).subscribe(() => {
-        sessionStorage.clear();
-        sessionStorage.removeItem('token');
-        sessionStorage.removeItem('usuario');
-        sessionStorage.removeItem(environment.TOKEN_NAME);
-        this.router.navigate(['/login']);
-      });
-    } else {
-      sessionStorage.clear();
-      sessionStorage.removeItem('token');
-      sessionStorage.removeItem('usuario');
-      sessionStorage.removeItem(environment.TOKEN_NAME);
-      this.router.navigate(['/login']);
-    }
+    // if (token) {
+    //   this.http.get(`${environment.HOST}/tokens/anular/${token}`).subscribe(() => {
+    //     sessionStorage.clear();
+    //     sessionStorage.removeItem('token');
+    //     sessionStorage.removeItem('usuario');
+    //     sessionStorage.removeItem(environment.TOKEN_NAME);
+    //     this.router.navigate(['/login']);
+    //   });
+    // } else {
+    //   sessionStorage.clear();
+    //   sessionStorage.removeItem('token');
+    //   sessionStorage.removeItem('usuario');
+    //   sessionStorage.removeItem(environment.TOKEN_NAME);
+    //   this.router.navigate(['/login']);
+    // }
+    this._token = null;
+    this._usuario = null;
+    sessionStorage.clear();
+    sessionStorage.removeItem(environment.TOKEN_NAME);
+    this.router.navigate(['/login']);
   }
 
  /**

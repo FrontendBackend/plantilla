@@ -4,15 +4,13 @@ import java.io.Serializable;
 import java.sql.Blob;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "OAUTH_REFRESH_TOKEN")
+// @Entity // TODO: Esta tabla queda en deshuso porque no se va guardar los tokens en BD debido a que ahora se va utilizar los tokens en memorias
+// @Table(name = "OAUTH_REFRESH_TOKEN")
 @Data
 @NoArgsConstructor
 public class TblOauthRefreshToken implements Serializable {

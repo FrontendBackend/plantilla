@@ -43,7 +43,7 @@
         <mat-label>Roles</mat-label>
         <mat-select formControlName="descIdRol" autocomplete="off" [class.is-invalid]="tieneError('descIdRol', 'any')">
           <mat-option *ngFor="let roles of lTblRolDTOListarRoles" [value]="roles.idRol">
-            {{roles.nombre}}
+            {{roles.descripcion}}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="tieneError('descIdRol', 'required')">

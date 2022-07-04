@@ -11,4 +11,6 @@ export const environment = {
   TOKEN_AUTH_USERNAME: 'templateapp',
   TOKEN_AUTH_PASSWORD: 'templatecodex',
   TOKEN_NAME: 'access_token',
+
+  REINTENTOS: 1,
 };

@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { AppRoutes } from './app.routing';
 import { AppComponent } from './app.component';
@@ -26,6 +26,8 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginFormularioComponent } from './login/login-formulario/login-formulario.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { TokenInterceptor } from './security/interceptors/token.interceptor';
+import { ServerErrorsInterceptor } from './security/interceptors/server-errors.interceptor';
 
 export function tokenGetter() {
   return sessionStorage.getItem(environment.TOKEN_NAME);
@@ -67,7 +69,9 @@ export function tokenGetter() {
       provide: LocationStrategy,
       // useClass: PathLocationStrategy,
       useClass: HashLocationStrategy,
-    }
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ServerErrorsInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

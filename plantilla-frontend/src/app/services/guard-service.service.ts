@@ -19,6 +19,22 @@ export class GuardServiceService implements CanActivate {
     private router: Router
   ) { }
 
+  /**
+   * Si el usuario no está autenticado, cierre la sesión y devuelva falso
+   * @param {ActivatedRouteSnapshot} next - ActivatedRouteSnapshot: la ruta que se está activando.
+   * @param {RouterStateSnapshot} state - Instantánea del estado del enrutador
+   * @returns Un valor booleano.
+   */
+   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+
+    if (!this.loginService.isAuthenticated()) {
+      this.loginService.cerrarSesion();
+      this.router.navigate(['/login']);
+      return false;
+    }
+    return true;
+  }
+
   // canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
   //   //1) VERIFICAR SI ESTA LOGUEADO
   //   let rpta = this.loginService.estaLogueado();
@@ -70,18 +86,4 @@ export class GuardServiceService implements CanActivate {
   //   }
   // }
 
-  /**
-   * Si el usuario no está autenticado, cierre la sesión y devuelva falso
-   * @param {ActivatedRouteSnapshot} next - ActivatedRouteSnapshot: la ruta que se está activando.
-   * @param {RouterStateSnapshot} state - Instantánea del estado del enrutador
-   * @returns Un valor booleano.
-   */
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-
-    if (!this.loginService.isAuthenticated()) {
-      this.loginService.cerrarSesion();
-      return false;
-    }
-    return true;
-  }
 }
