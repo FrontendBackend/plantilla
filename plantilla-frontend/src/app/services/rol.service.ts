@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
@@ -24,5 +25,34 @@ export class RolService {
   listarRoles(): Observable<TblRolDTO[]> {
     const endPoint = `${this.url}/listarRoles`;
     return this.httpClient.get<TblRolDTO[]>(endPoint, { headers: this.httpHeaders });
+  }
+
+  /**
+   * Me permite crear nuevos roles
+   * @param tblRolDTO
+   * @returns
+   */
+  crearRol(tblRolDTO: TblRolDTO): Observable<TblRolDTO> {
+    const urlEndPoint = `${this.url}/crearRol`;
+    const clave = 'tblRolDTOCreado';
+
+    return this.httpClient.post<TblRolDTO>(urlEndPoint, tblRolDTO, { headers: this.httpHeaders })
+      .pipe(
+        map((respuesta: any) => respuesta[clave] as TblRolDTO)
+      );
+  }
+
+  /**
+   * Me permite modificar un rol
+   * @param tblRolDTO
+   * @returns
+   */
+  modificarRol(tblRolDTO: TblRolDTO): Observable<TblRolDTO> {
+    const urlEndPoint = `${this.url}/modificarRol`;
+
+    return this.httpClient.put<TblRolDTO>(urlEndPoint, tblRolDTO, { headers: this.httpHeaders })
+      .pipe(
+        map((respuesta: any) => respuesta['tblRolDTOModificada'] as TblRolDTO)
+      );
   }
 }

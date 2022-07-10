@@ -55,11 +55,11 @@ public class TblUsuario implements Serializable {
     private String esRegistro;
 
     // Esta es una columna en la base de datos que no permite valores NULL.
-    @Column(name = "US_CREACION", nullable = true, length = 10)
+    @Column(name = "US_CREACION", nullable = true, length = 50)
     private String usCreacion;
 
     // Esta es una columna en la base de datos que no permite valores NULL.
-    @Column(name = "IP_CREACION", nullable = true, length = 9)
+    @Column(name = "IP_CREACION", nullable = true)
     private String ipCreacion;
 
     // Una columna de fecha en la base de datos que no permite valores NULL.
@@ -68,11 +68,11 @@ public class TblUsuario implements Serializable {
     private Date feCreacion;
 
     // Crear una columna en la base de datos llamada US_ACTUALIZACION que permita valores nulos y tenga una longitud de 10.
-    @Column(name = "US_ACTUALIZACION", nullable = true, length = 10)
+    @Column(name = "US_ACTUALIZACION", nullable = true, length = 50)
     private String usActualizacion;
 
     // Creando una columna en la base de datos llamada IP_ACTUALIZACION que permita valores nulos y tenga una longitud de 9.
-    @Column(name = "IP_ACTUALIZACION", nullable = true, length = 9)
+    @Column(name = "IP_ACTUALIZACION", nullable = true)
     private String ipActualizacion;
 
     // Una columna de fecha en la base de datos que no permite valores nulos.

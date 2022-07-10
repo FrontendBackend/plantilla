@@ -1,0 +1,62 @@
+<h3><strong>{{ nombreAccion | titlecase }} rol de usuario</strong></h3>
+<form fxLayout="column" [formGroup]="frmReactivo" (ngSubmit)="enviar()">
+
+  <div fxLayout="row" *ngIf="enProceso">
+    <mat-progress-bar mode="query" color="accent" fxFlex></mat-progress-bar>
+    <br />
+  </div>
+
+  <mat-dialog-content class="mat-typography" *ngIf="!enProceso">
+
+    <br />
+
+    <div fxLayout="row" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" fxLayout.lt-md="column">
+      <mat-form-field fxFlex appearance="outline">
+        <mat-label>N° orden:</mat-label>
+        <input matInput type="text" maxlength="4" formControlName="nuOrden" autocomplete="off">
+        <!-- <mat-progress-bar uppercase *ngIf="frmReactivo.controls['nuOrden'].pending" mode="buffer">
+        </mat-progress-bar> -->
+        <!-- <mat-error *ngIf="frmReactivo.get('nuOrden').errors?.usernameExiste">
+          El usuario ya existe
+        </mat-error> -->
+        <mat-error *ngIf="tieneError('nuOrden', 'required')">
+          Es requerido
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" fxLayout.lt-md="column">
+      <mat-form-field fxFlex appearance="outline">
+        <mat-label>Nombre:</mat-label>
+        <input matInput type="text" maxlength="50" formControlName="nombre" autocomplete="off">
+        <!-- <mat-progress-bar uppercase *ngIf="frmReactivo.controls['nuOrden'].pending" mode="buffer">
+        </mat-progress-bar> -->
+        <!-- <mat-error *ngIf="frmReactivo.get('nuOrden').errors?.usernameExiste">
+          El usuario ya existe
+        </mat-error> -->
+        <mat-error *ngIf="tieneError('nombre', 'required')">
+          Es requerido
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="50px" fxLayoutGap.lt-md="0px" fxLayout.lt-md="column">
+      <mat-form-field fxFlex appearance="outline">
+        <mat-label>Descripción:</mat-label>
+        <textarea matInput type="text" maxlength="255" rows="6" formControlName="descripcion" autocomplete="off"></textarea>
+        <mat-error *ngIf="tieneError('descripcion', 'required')">
+          Es requerido
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>CERRAR</button>
+    <button mat-button type="submit" cdkFocusInitial color="primary"
+      *ngIf="parametroDialogo.accion !== 4 && !enProceso">
+      <mat-icon>save</mat-icon>
+      {{ nombreAccion }}
+    </button>
+  </mat-dialog-actions>
+</form>

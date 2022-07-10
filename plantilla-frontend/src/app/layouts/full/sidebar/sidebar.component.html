@@ -21,7 +21,7 @@
     </mat-menu>
 
 </div>
-<mat-nav-list appAccordion>
+<mat-nav-list appAccordion fxFlex.lg="0 1 calc(50%)">
 
   <!-- Se muestra el menú DASHBOARD como principal -->
   <mat-list-item appAccordionLink *ngFor="let dashboard of menuItems.getMenuitemDashboard()" routerLinkActive="selected" group="{{dashboard.state}}">
@@ -35,7 +35,7 @@
   </mat-list-item>
 
   <!-- Menus en general -->
-    <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem()" routerLinkActive="selected" group="{{menuitem.state}}">
+    <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem()" routerLinkActive="selected" group="{{menuitem.state}}" >
 
         <a class="" appAccordionToggle [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'link' && loginService.hasRole(menuitem.rol)">
             <mat-icon>{{ menuitem.icon }}</mat-icon>

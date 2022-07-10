@@ -4,6 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuditoriaContenedorDetalleComponent } from './auditoria/auditoria-contenedor-detalle/auditoria-contenedor-detalle.component';
 import { UsuarioContenedorDetalleComponent } from './usuario/usuario-contenedor-detalle/usuario-contenedor-detalle.component';
 import { UsuarioListaComponent } from './usuario/usuario-lista/usuario-lista.component';
+import { RolContenedorDetalleComponent } from './rol/rol-contenedor-detalle/rol-contenedor-detalle.component';
+import { RolListaComponent } from './rol/rol-lista/rol-lista.component';
 
 const routes: Routes = [
 
@@ -39,6 +41,24 @@ const routes: Routes = [
         data: {
           title: 'Lista de Usuarios',
           breadcrumb: 'Lista de Usuarios'
+        }
+      },
+    ]
+  },
+  {
+    path: 'rol',
+    component: RolContenedorDetalleComponent,
+    data: {
+      title: 'Rol',
+      breadcrumb: 'Rol'
+    },
+    children: [
+      {
+        path: '',
+        component: RolListaComponent,
+        data: {
+          title: 'Lista de Roles',
+          breadcrumb: 'Lista de Roles'
         }
       },
     ]

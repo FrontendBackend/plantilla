@@ -16,7 +16,10 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { Not404Component } from './error/not404/not404.component';
 import { Not403Component } from './error/not403/not403.component';
 import { UsuarioContenedorDetalleComponent } from './usuario/usuario-contenedor-detalle/usuario-contenedor-detalle.component';
-
+import { RolListaComponent } from './rol/rol-lista/rol-lista.component';
+import { RolDialogoComponent } from './rol/rol-dialogo/rol-dialogo.component';
+import { RolContenedorDetalleComponent } from './rol/rol-contenedor-detalle/rol-contenedor-detalle.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { UsuarioContenedorDetalleComponent } from './usuario/usuario-contenedor-
     AuditoriaContenedorDetalleComponent,
     Not404Component,
     Not403Component,
-    UsuarioContenedorDetalleComponent
+    UsuarioContenedorDetalleComponent,
+    RolListaComponent,
+    RolDialogoComponent,
+    RolContenedorDetalleComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +44,8 @@ import { UsuarioContenedorDetalleComponent } from './usuario/usuario-contenedor-
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    CdkTableModule
+    CdkTableModule,
+    DragDropModule,
   ]
 })
 export class FeaturesModule { }

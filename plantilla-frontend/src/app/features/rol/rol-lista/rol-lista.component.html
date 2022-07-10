@@ -1,0 +1,120 @@
+<div fxLayout="column" fxFlex>
+
+  <mat-toolbar class="mat-elevation-z1">
+    <div class="flexcontainer" fxFlex="100">
+      <button *ngIf="!esFormularioSoloLectura" mat-fab color="primary" class="md-fab-bottom"
+        matTooltip="Agregar integrante consorcio" (click)="crearRol()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <br>
+
+  <div fxLayout="row" *ngIf="enProceso">
+    <mat-progress-bar color="primary" mode="query" fxFlex></mat-progress-bar>
+    <br />
+  </div>
+
+  <mat-card fxLayout="column">
+
+    <div class="alerta alerta-warning animated fadeInDown" *ngIf="!enProceso && cantidadRegistros == 0">
+      Sin registros para mostrar
+    </div>
+
+    <div *ngIf="cantidadRegistros > 0">
+
+      <mat-table [dataSource]="dataSourceRol" #dataTable [cdkDropListData]="dataSourceRol" cdkDropList (cdkDropListDropped)="dropTable($event)">
+
+        <ng-container matColumnDef="nuOrden">
+          <mat-header-cell *matHeaderCellDef>N° orden</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+
+            <mat-icon cdkDragHandle>reorder</mat-icon>
+            &nbsp;&nbsp;
+
+            <div fxLayout="column" fxFlex>
+
+              <div fxLayout="row" fxLayoutGap="10px" fxLayoutGap.lt-md="0px" fxLayout.lt-md="column">
+                <div class="mat-h4">
+                  <br>
+                  <table>
+                    <tr>
+                      <td>
+                        {{row.nuOrden}}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="nombre">
+          <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+
+            <div fxLayout="column" fxFlex>
+
+              <div fxLayout="row" fxLayoutGap="10px" fxLayoutGap.lt-md="0px" fxLayout.lt-md="column">
+                <div class="mat-h4">
+                  <br>
+                  <table>
+                    <tr>
+                      <td>
+                        {{row.nombre}}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="descripcion">
+          <mat-header-cell *matHeaderCellDef>Descripción</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+
+            <div fxLayout="column" fxFlex>
+
+              <div fxLayout="row" fxLayoutGap="10px" fxLayoutGap.lt-md="0px" fxLayout.lt-md="column">
+                <div class="mat-h4">
+                  <br>
+                  <table>
+                    <tr>
+                      <td>
+                        {{row.descripcion}}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+
+          <mat-cell *matCellDef="let row; let i = index;">
+            <div fxFlex align="end">
+              <button mat-button matTooltip="Modificar" (click)="modificarRol(row, i)" *ngIf="!esFormularioSoloLectura">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-button matTooltip="Modificar" (click)="consultarRol(row, i)" *ngIf="!esFormularioSoloLectura">
+                <mat-icon>visibility</mat-icon>
+              </button>
+            </div>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="columnasAMostrar"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columnasAMostrar;" cdkDrag [cdkDragData]="row" ></mat-row>
+      </mat-table>
+
+    </div>
+  </mat-card>
+</div>

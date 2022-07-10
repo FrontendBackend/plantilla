@@ -40,8 +40,15 @@ const MENUITEMS = [
   {
     state: 'usuario',
     type: 'link',
-    name: 'USUARIO',
+    name: 'USUARIOS',
     icon: 'people',
+    rol: 'ADMIN'
+  },
+  {
+    state: 'rol',
+    type: 'link',
+    name: 'ROLES',
+    icon: 'assignment_ind',
     rol: 'ADMIN'
   },
   // { state: 'button', type: 'link', name: 'Buttons', icon: 'crop_7_5' },

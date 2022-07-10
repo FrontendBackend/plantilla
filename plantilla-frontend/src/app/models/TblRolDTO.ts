@@ -9,4 +9,7 @@ export class TblRolDTO {
 
   // Creando una columna en la base de datos llamada DESCRIPCION.
   descripcion: string;
+
+  // Campo NUMERO DE ORDEN y no es mandatorio.
+  nuOrden: number;
 }
