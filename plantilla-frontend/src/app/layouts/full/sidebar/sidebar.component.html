@@ -21,7 +21,7 @@
     </mat-menu>
 
 </div>
-<mat-nav-list appAccordion fxFlex.lg="0 1 calc(50%)">
+<mat-nav-list appAccordion>
 
   <!-- Se muestra el menú DASHBOARD como principal -->
   <mat-list-item appAccordionLink *ngFor="let dashboard of menuItems.getMenuitemDashboard()" routerLinkActive="selected" group="{{dashboard.state}}">

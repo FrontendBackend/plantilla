@@ -1,4 +1,5 @@
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { filter } from 'rxjs/operators';
+import { CdkDragDrop, CdkDragEnter, CdkDragMove, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -50,20 +51,21 @@ export class RolListaComponent implements OnInit {
     this.listarRoles();
   }
 
-  dropTable(event: CdkDragDrop<TblRolDTO[]> | CdkDragDrop<any>): void {
-    // moveItemInArray(this.dataSourceDocumentoRequerido, event.previousIndex, event.currentIndex);
+  arrastrarSoltarItem(event: CdkDragDrop<TblRolDTO[]> | CdkDragDrop<any>): void {
 
-    // const prevIndex = this.dataSourceDocumentoRequerido.data.findIndex((d) => {
-    //   d === event.item.data
-    //   console.log(d);
-
-    // });
     const prevIndex = this.dataSourceRol.data.findIndex((d) =>
       d === event.item.data
     );
 
-
     moveItemInArray(this.dataSourceRol.data, prevIndex, event.currentIndex);
+
+    // Esta es una opción para actualizar el orden de la lista de manera automatizada
+    this.dataSourceRol.data.forEach((rol, idx) => {
+      rol.nuOrden = idx + 1;
+      rol.nombre;
+
+      this.actualizarOrden(rol.idRol, rol.nuOrden);
+    });
 
     let previo = prevIndex + 1;
     let current = event.currentIndex + 1;
@@ -71,7 +73,26 @@ export class RolListaComponent implements OnInit {
     console.log('Antes => ' + previo);
     console.log('Ahora => ' + current);
 
-    this.table.renderRows();
+    this.matSnackBar.open('Se ordenó el item seleccionado', 'Ok', {
+      duration: 3000
+    });
+    // this.table.renderRows();
+  }
+
+
+  actualizarOrden(obtenerIdRol: number, current: number) {
+    this.enProceso = true;
+
+    let tblRolDTOCU = new TblRolDTO();
+    tblRolDTOCU.nuOrden = current;
+
+    // Recuperando las propiedades originales
+    tblRolDTOCU.idRol = obtenerIdRol;
+
+    this.rolService.modificarRol(tblRolDTOCU).subscribe((respuesta: any) => {
+      this.listarRoles();
+      this.enProceso = false;
+    });
   }
 
   get columnasAMostrar(): string[] {

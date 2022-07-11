@@ -23,7 +23,9 @@ public interface RolRepository extends JpaRepository<TblRol, Long> {
                         + "r.idRol, r.nuOrden, r.descripcion, r.nombre "
                         + ") "
                         + "FROM TblRol r "
-                        + "WHERE r.esRegistro = 1 ")
+                        + "WHERE r.esRegistro = 1 "
+                        + "ORDER BY r.nuOrden "
+                        )
         List<TblRolDTO> listarRoles();
 
         /**

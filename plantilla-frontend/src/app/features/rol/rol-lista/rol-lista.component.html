@@ -24,8 +24,12 @@
 
     <div *ngIf="cantidadRegistros > 0">
 
-      <mat-table [dataSource]="dataSourceRol" #dataTable [cdkDropListData]="dataSourceRol" cdkDropList (cdkDropListDropped)="dropTable($event)">
+      <mat-table [dataSource]="dataSourceRol" #dataTable [cdkDropListData]="dataSourceRol" cdkDropList
 
+      (cdkDropListDropped)="arrastrarSoltarItem($event)"
+      >
+      <!-- (cdkDragEntered)="dragEntered($event)"
+      (cdkDragMoved)="dragMoved($event)" -->
         <ng-container matColumnDef="nuOrden">
           <mat-header-cell *matHeaderCellDef>N° orden</mat-header-cell>
           <mat-cell *matCellDef="let row">
@@ -112,7 +116,7 @@
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="columnasAMostrar"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: columnasAMostrar;" cdkDrag [cdkDragData]="row" ></mat-row>
+        <mat-row *matRowDef="let row; columns: columnasAMostrar;" cdkDrag cdkDragLockAxis="y" [cdkDragData]="row" ></mat-row>
       </mat-table>
 
     </div>

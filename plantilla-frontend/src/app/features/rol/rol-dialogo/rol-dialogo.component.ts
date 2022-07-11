@@ -88,7 +88,7 @@ export class RolDialogoComponent implements OnInit {
 
     this.frmReactivo = this.formBuilder.group(
       {
-        nuOrden: [this.tblRolDTO.nuOrden, [Validators.required]],
+        nuOrden: [this.tblRolDTO.nuOrden],
         nombre: [this.tblRolDTO.nombre, [Validators.required]],
         descripcion: [this.tblRolDTO.descripcion, [Validators.required]],
       }

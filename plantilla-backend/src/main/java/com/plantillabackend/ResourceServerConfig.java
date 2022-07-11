@@ -49,7 +49,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/tokens/anular/**").permitAll()
                 .antMatchers("/v2/api-docs/**").permitAll()
                 .antMatchers("/v3/api-docs/**").permitAll()
-                .antMatchers("/usuarios/**").authenticated()
+                // .antMatchers("/usuarios/**").authenticated()
                 .antMatchers("/roles/**").authenticated()
                 .antMatchers("/menus/**").authenticated() // En construcción
                 .antMatchers("/tokens/**").authenticated();

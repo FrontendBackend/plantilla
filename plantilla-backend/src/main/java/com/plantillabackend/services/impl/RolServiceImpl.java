@@ -53,9 +53,9 @@ public class RolServiceImpl implements RolService {
     @Transactional(readOnly = false)
     public TblRolDTO modificarRol(TblRolDTO tblRolDTO, TblRol tblRol, AuditoriaDTO auditoriaDTO) throws Exception {
 
-        tblRol.setNombre(tblRolDTO.getNombre());
+        // tblRol.setNombre(tblRolDTO.getNombre());
         tblRol.setNuOrden(tblRolDTO.getNuOrden());
-        tblRol.setDescripcion(tblRolDTO.getDescripcion());
+        // tblRol.setDescripcion(tblRolDTO.getDescripcion());
 
         tblRol.setFeActualizacion(auditoriaDTO.getFecha());
         tblRol.setUsActualizacion(auditoriaDTO.getUsername());
