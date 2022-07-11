@@ -29,6 +29,13 @@
 }
 
 /*
+* Cambio en la forma del texto de la tabla
+*/
+.mat-table td {
+  font-family: Roboto,"Helvetica Neue", sans-serif !important;
+}
+
+/*
 * Estilos para el drag & drop
 */
 .cdk-drag-preview {

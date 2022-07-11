@@ -76,6 +76,22 @@ export class LoginService {
     // }
   }
 
+  /**
+   * Metodo que permite direccionar a la plantilla Error-401 cuando el
+   * sistema indica que ha expirado la sesión y luego regresa al login principal
+   */
+  cerrarSesionExpirado() {
+    this._token = null;
+    this._usuario = null;
+    sessionStorage.clear();
+    sessionStorage.removeItem(environment.TOKEN_NAME);
+    this.router.navigate(['/not-401']);
+
+    setTimeout(() => {
+    this.router.navigate(['/login']);
+    }, 6000);
+  }
+
  /**
   * Es una solicitud POST que envía una cadena al backend y devuelve un número
   * @param {string} correo - cuerda

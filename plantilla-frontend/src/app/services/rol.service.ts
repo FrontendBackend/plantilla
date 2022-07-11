@@ -28,6 +28,14 @@ export class RolService {
   }
 
   /**
+   * Permite obtener las configuraciones necesarias para el listado de roles de usuario.
+   */
+   obtenerConfiguracionesGenerales(idRol: number): Observable<any> {
+    const urlEndPoint = `${this.url}/obtenerConfiguracionesGenerales/${idRol}`;
+    return this.httpClient.get<any[]>(urlEndPoint);
+  }
+
+  /**
    * Me permite crear nuevos roles
    * @param tblRolDTO
    * @returns

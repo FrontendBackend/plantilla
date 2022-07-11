@@ -204,7 +204,7 @@ public class UsuarioController extends BaseController {
 
         return new ResponseEntity<Map<String, Object>>(respuesta, HttpStatus.OK);
     }
-
+    
     /**
      * La función recibe un objeto JSON, lo valida y luego actualiza la base de datos con los nuevos
      * valores

@@ -20,6 +20,7 @@ import { RolListaComponent } from './rol/rol-lista/rol-lista.component';
 import { RolDialogoComponent } from './rol/rol-dialogo/rol-dialogo.component';
 import { RolContenedorDetalleComponent } from './rol/rol-contenedor-detalle/rol-contenedor-detalle.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { Not401Component } from './error/not401/not401.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     UsuarioContenedorDetalleComponent,
     RolListaComponent,
     RolDialogoComponent,
-    RolContenedorDetalleComponent
+    RolContenedorDetalleComponent,
+    Not401Component
   ],
   imports: [
     CommonModule,

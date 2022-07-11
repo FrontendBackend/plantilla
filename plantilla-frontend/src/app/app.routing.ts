@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { Not401Component } from './features/error/not401/not401.component';
 import { Not404Component } from './features/error/not404/not404.component';
 
 import { FullComponent } from './layouts/full/full.component';
@@ -51,6 +52,13 @@ export const AppRoutes: Routes = [
     component: Not404Component,
     data: { title: 'not-404', breadcrumb: 'not-404' }
   },
+
+  {
+    path: 'not-401',
+    component: Not401Component,
+    data: { title: 'not-401', breadcrumb: 'not-401' }
+  },
+
   {
     path: '**',
     redirectTo: 'not-404'

@@ -46,7 +46,7 @@ export class ServerErrorsInterceptor implements HttpInterceptor {
                 else if (err.status === 401) {  //No Autorizado
 
                     if (!this.authService.isAuthenticated()) {
-                        this.authService.cerrarSesion();
+                        this.authService.cerrarSesionExpirado();
                     }else{
                         this.snackBar.open(err.error.message, 'ERROR 401', { duration: 12000 });
                         this.router.navigate(['/dashboard']);

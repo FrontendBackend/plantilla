@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -134,5 +135,35 @@ public class RolController extends BaseController {
         respuesta.put("tblRolDTOModificada", tblRolDTOModificada);
 
         return new ResponseEntity<Map<String, Object>>(respuesta, HttpStatus.CREATED);
+    }
+
+    
+    @GetMapping("/obtenerConfiguracionesGenerales/{idRol}")
+    public ResponseEntity<?> obtenerConfiguracionesGenerales(@PathVariable Long idRol) {
+        String mensaje;
+        Map<String, Object> respuesta = new HashMap<>();
+
+        TblRolDTO tblRolDTO = null;
+
+        try {
+            tblRolDTO = this.rolService.obtenerRoloPorId(idRol);
+        } catch (DataAccessException e) {
+            respuesta.put("mensaje", "Ocurrió un error al intentar recuperar el portafolio");
+            respuesta.put("error", e.getMostSpecificCause().getMessage());
+            log.error(e.getMostSpecificCause().getMessage());
+            return new ResponseEntity<Map<String, Object>>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        if (tblRolDTO == null) {
+            mensaje = String.format("El rol con el id: %d no existe en la base de datos", idRol);
+            respuesta.put("mensaje", mensaje);
+
+            return new ResponseEntity<Map<String, Object>>(respuesta, HttpStatus.NO_CONTENT);
+        }
+
+        respuesta.put("mensaje", "El rol ha sido recuperado");
+        respuesta.put("tblRolDTO", tblRolDTO);
+
+        return new ResponseEntity<Map<String, Object>>(respuesta, HttpStatus.OK);
     }
 }

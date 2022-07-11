@@ -59,7 +59,25 @@ export class RolDialogoComponent implements OnInit {
     );
     this.dialogRef.updateSize('38%');
 
-    this.iniciarFormulario();
+    this.configurarInicio();
+  }
+
+  configurarInicio() {
+    this.enProceso = true;
+
+    const idRol = this.tblRolDTO.idRol;
+
+    this.rolService.obtenerConfiguracionesGenerales(idRol).subscribe((respuesta: any) => {
+      const clave = 'tblPortafolioDTO';
+
+      if (this.tipoAccionCrud === ETipoAccionCRUD.MODIFICAR || this.tipoAccionCrud === ETipoAccionCRUD.CONSULTAR) {
+        this.tblRolDTO = respuesta[clave];
+      }
+
+      this.iniciarFormulario();
+
+      this.enProceso = false;
+    });
   }
 
   iniciarFormulario() {
@@ -70,7 +88,6 @@ export class RolDialogoComponent implements OnInit {
 
     this.frmReactivo = this.formBuilder.group(
       {
-        // Persona jurídica
         nuOrden: [this.tblRolDTO.nuOrden, [Validators.required]],
         nombre: [this.tblRolDTO.nombre, [Validators.required]],
         descripcion: [this.tblRolDTO.descripcion, [Validators.required]],

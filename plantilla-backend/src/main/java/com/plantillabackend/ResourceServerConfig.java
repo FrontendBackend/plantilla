@@ -49,16 +49,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/tokens/anular/**").permitAll()
                 .antMatchers("/v2/api-docs/**").permitAll()
                 .antMatchers("/v3/api-docs/**").permitAll()
-                // .antMatchers("/usuarios/**").authenticated()
-                .antMatchers("/centrosestudios/**").authenticated()
-                .antMatchers("/conyugesempleados/**").authenticated()
-                .antMatchers("/dialectos/**").authenticated()
-                .antMatchers("/estudiossuperiores/**").authenticated()
-                .antMatchers("/profesiones/**").authenticated()
-                .antMatchers("/renaes/**").authenticated()
-                .antMatchers("/ubigeos/**").authenticated()
-
-                .antMatchers("/menus/**").authenticated()
+                .antMatchers("/usuarios/**").authenticated()
+                .antMatchers("/roles/**").authenticated()
+                .antMatchers("/menus/**").authenticated() // En construcción
                 .antMatchers("/tokens/**").authenticated();
 
     }
