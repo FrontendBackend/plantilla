@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.plantillabackend.dtos.AuditoriaDTO;
 import com.plantillabackend.dtos.TblRolDTO;
-import com.plantillabackend.dtos.TblUsuarioDTO;
 import com.plantillabackend.models.entity.TblRol;
 
 public interface RolService {

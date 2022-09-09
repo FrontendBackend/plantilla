@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.plantillabackend.dtos.AuditoriaDTO;
 import com.plantillabackend.dtos.TblRolDTO;
-import com.plantillabackend.dtos.TblUsuarioDTO;
 import com.plantillabackend.models.entity.TblRol;
 import com.plantillabackend.models.repository.RolRepository;
 import com.plantillabackend.services.RolService;

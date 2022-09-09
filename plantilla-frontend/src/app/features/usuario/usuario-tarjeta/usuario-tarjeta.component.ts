@@ -25,7 +25,14 @@ export class UsuarioTarjetaComponent implements OnInit {
    * @param idMatriz Identificador de matriz a editar.
    */
   editarMatriz(idMatriz: number) {
-    this.router.navigate([`/info-maestra/matriz/${ETipoAccionCRUD.MODIFICAR}`, idMatriz, 0]);
+    
+    // console.log(this.router.routerState.snapshot.url);
+    // console.log({'': this.router.routerState});
+    if(this.router.routerState.snapshot.url === "/usuario"){
+      this.router.navigate([`/not-404-interno`]);
+    }else{
+      this.router.navigate([`/info-maestra/matriz/${ETipoAccionCRUD.MODIFICAR}`, idMatriz, 0]);
+    }
   }
 
   /**
@@ -33,7 +40,13 @@ export class UsuarioTarjetaComponent implements OnInit {
    * @param idMatriz Identificador de matriz a consultar.
    */
   consultarMatriz(idMatriz: number) {
-    this.router.navigate([`/info-maestra/matriz/${ETipoAccionCRUD.CONSULTAR}`, idMatriz, 0]);
+
+    // Si no esta definido la ruta, marcará como "Página no encontrado", de lo contrario, la ruta está definido.
+    if(this.router.routerState.snapshot.url === "/usuario"){
+      this.router.navigate([`/not-404-interno`]);
+    }else{
+      this.router.navigate([`/info-maestra/matriz/${ETipoAccionCRUD.CONSULTAR}`, idMatriz, 0]);
+    }
   }
 
 }

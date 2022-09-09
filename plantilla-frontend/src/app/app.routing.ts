@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { Not401Component } from './features/error/not401/not401.component';
 import { Not404Component } from './features/error/not404/not404.component';
+import { Not404internoComponent } from './features/error/not404interno/not404interno.component';
 
 import { FullComponent } from './layouts/full/full.component';
 import { LoginFormularioComponent } from './login/login-formulario/login-formulario.component';
@@ -51,6 +52,15 @@ export const AppRoutes: Routes = [
     path: 'not-404',
     component: Not404Component,
     data: { title: 'not-404', breadcrumb: 'not-404' }
+  },
+
+  /**
+   * Permite mostrar la pagina de recurso no encontrado cuando esto sucede dentro del sistema
+   */
+  {
+    path: 'not-404-interno',
+    component: Not404internoComponent,
+    data: { title: 'not-404-interno', breadcrumb: 'not-404-interno' }
   },
 
   {

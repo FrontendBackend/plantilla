@@ -3,10 +3,21 @@
   margin: 0 auto;
 }
 
+.main-container {
+  min-height: 1500px;
+}
+
 .example-fill-remaining-space {
   /* This fills the remaining space, by using flexbox.
        Every toolbar row uses a flexbox row layout. */
   flex: 1 1 auto;
+}
+
+/* 
+*Para auto-ajustar los textos de un contenido y evitar que se sobresalga
+*/
+.content {
+  word-break: break-all;
 }
 
 .content-wrap {

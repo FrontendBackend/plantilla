@@ -1,9 +1,12 @@
+<div class="content">
+
 <mat-card>
   <mat-card-header>
     <div mat-card-avatar>
       <mat-icon>person</mat-icon>
     </div>
     <mat-card-title matTooltip="Nombre de usuario">
+
       {{ tblUsuarioDTO.username | uppercase }}
     </mat-card-title>
     <mat-card-subtitle matTooltip="Correo">
@@ -25,12 +28,15 @@
 
   <mat-card-actions fxLayout="row">
     <div fxFlex align="start">
-      <button mat-icon-button mat-sm-button color="primary" class="mr-1" (click)="editarMatriz(tblUsuarioDTO.idUsuario)" matTooltip="Editar" >
+      <button mat-icon-button mat-sm-button color="primary" class="mr-1" (click)="editarMatriz(tblUsuarioDTO.idUsuario)"
+        matTooltip="Editar">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button mat-sm-button color="primary" class="mr-1" (click)="consultarMatriz(tblUsuarioDTO.idUsuario)" matTooltip="Consultar">
+      <button mat-icon-button mat-sm-button color="primary" class="mr-1"
+        (click)="consultarMatriz(tblUsuarioDTO.idUsuario)" matTooltip="Consultar">
         <mat-icon fontSet="material-icons-outlined">visibility</mat-icon>
       </button>
     </div>
   </mat-card-actions>
 </mat-card>
+</div>
