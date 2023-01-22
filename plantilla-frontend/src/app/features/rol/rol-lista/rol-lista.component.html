@@ -24,10 +24,7 @@
 
     <div *ngIf="cantidadRegistros > 0">
 
-      <mat-table [dataSource]="dataSourceRol" #dataTable [cdkDropListData]="dataSourceRol" cdkDropList
-
-      (cdkDropListDropped)="arrastrarSoltarItem($event)"
-      >
+      <mat-table [dataSource]="dataSourceRol" #dataTable [cdkDropListData]="dataSourceRol" cdkDropList (cdkDropListDropped)="arrastrarSoltarItem($event)" class="cursor">
       <!-- (cdkDragEntered)="dragEntered($event)"
       (cdkDragMoved)="dragMoved($event)" -->
         <ng-container matColumnDef="nuOrden">
